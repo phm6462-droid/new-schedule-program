@@ -1,13 +1,17 @@
 {
-  "updatedAt": "2026-07-29T00:33:36+09:00",
+  "updatedAt": "2026-07-29T00:41:04+09:00",
   "source": {
     "baseUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate={ym}"
   },
-  "months": [],
-  "failed": [
+  "months": [
     {
       "key": "2026-08",
-      "reason": "HTML 표가 없습니다."
+      "label": "2026년 08월",
+      "url": "data/2026-08.html",
+      "fileName": "2026-08.html",
+      "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-08",
+      "updatedAt": "2026-07-29T00:41:10+09:00"
     }
-  ]
+  ],
+  "failed": []
 }
