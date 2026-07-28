@@ -1,0 +1,3094 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>근무표 도구</title>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --surface-muted: #f9fafb;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #b8c2d1;
+      --line-strong: #94a3b8;
+      --accent: #2563eb;
+      --accent-soft: #dbeafe;
+      --shift: #7c3aed;
+      --shift-soft: #ede9fe;
+      --weekend-sun: #fee2e2;
+      --weekend-sat: #dbeafe;
+      --modal-overlay: rgba(15, 23, 42, 0.45);
+      --ok: #065f46;
+      --warn: #92400e;
+      --selection-ink: #111111;
+      --selection-ink-soft: rgba(17, 17, 17, 0.08);
+      --font-scale: 1;
+      --ui-font-size: calc(14px * var(--font-scale));
+      --ui-gap: calc(8px * var(--font-scale));
+      --ui-radius: calc(10px * var(--font-scale));
+      --ui-control-height: calc(36px * var(--font-scale));
+      --calendar-min-width: 860px;
+      --calendar-day-min-height: 102px;
+      --calendar-weekday-height: 20px;
+      --calendar-day-pad-y: 3px;
+      --calendar-day-pad-x: 1px;
+      --calendar-date-font-size: 13px;
+      --calendar-shift-font-size: 11px;
+      --calendar-coworker-font-size: 12px;
+      --calendar-coworker-line-height: 1.35;
+    }
+    html[data-theme="dark"],
+    body[data-theme="dark"] {
+      color-scheme: dark;
+    }
+    body[data-theme="dark"] {
+      --bg: #000000;
+      --card: #000000;
+      --surface: #000000;
+      --surface-soft: #000000;
+      --surface-muted: #000000;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --line: #4b5563;
+      --line-strong: #6b7280;
+      --accent: #60a5fa;
+      --accent-soft: #0f172a;
+      --shift: #a78bfa;
+      --shift-soft: #1f123d;
+      --weekend-sun: #140707;
+      --weekend-sat: #08111f;
+      --modal-overlay: rgba(0, 0, 0, 0.88);
+      --selection-ink: #f8fafc;
+      --selection-ink-soft: rgba(248, 250, 252, 0.1);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: var(--ui-font-size);
+      line-height: 1.35;
+      overflow-x: hidden;
+    }
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: calc(24px * var(--font-scale));
+    }
+    .title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .sub {
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: calc(16px * var(--font-scale));
+      padding: calc(16px * var(--font-scale));
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 14px 0 8px;
+    }
+    input[type="file"], input[type="text"], select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      font-size: 14px;
+    }
+    .hint, .status {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .status {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      white-space: pre-wrap;
+    }
+    .status:empty {
+      display: none;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      background: var(--surface);
+    }
+    .selected-people {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 4px 0 8px;
+    }
+    .person-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .pill-x {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--muted);
+      padding: 0;
+    }
+    .tabbar {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 10px;
+      flex-wrap: wrap;
+    }
+    .tabbar button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .tabbar button.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      margin: 8px 0 12px;
+    }
+    .calendar-shell {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 1px;
+    }
+    .calendar {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0;
+      min-width: 630px;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .calendar.personal-tight {
+      gap: 0;
+    }
+    .weekday, .day {
+      background: var(--surface);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      border-top: 0;
+      border-left: 0;
+      border-radius: 0;
+      min-height: calc(var(--calendar-day-min-height) * var(--font-scale));
+      padding: calc(var(--calendar-day-pad-y) * var(--font-scale)) calc(var(--calendar-day-pad-x) * var(--font-scale));
+    }
+    .calendar.personal-tight .weekday,
+    .calendar.personal-tight .day {
+      border-radius: 0;
+      padding: 1px 0;
+    }
+    .calendar.personal-tight .day {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      justify-items: center;
+      align-content: start;
+      row-gap: 1px;
+    }
+    .day.shift-focus {
+      border: 2px solid var(--shift);
+      box-shadow: inset 0 0 0 1px rgba(124, 58, 237, 0.15);
+    }
+    .day.day-selected {
+      position: relative;
+      outline: 3px solid var(--selection-ink);
+      outline-offset: -3px;
+      z-index: 1;
+    }
+    .weekday {
+      min-height: calc(var(--calendar-weekday-height) * var(--font-scale));
+      height: calc(var(--calendar-weekday-height) * var(--font-scale));
+      text-align: center;
+      font-weight: 800;
+      background: var(--surface-soft);
+      padding: 0 calc(1px * var(--font-scale));
+      line-height: 1;
+      border-radius: calc(4px * var(--font-scale));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .weekday.sun, .day.sun, .day.holiday {
+      background: var(--weekend-sun);
+    }
+    .weekday.sat, .day.sat {
+      background: var(--weekend-sat);
+    }
+    .day.empty {
+      background: transparent;
+      border-style: dashed;
+    }
+    .date {
+      font-weight: 800;
+      font-size: var(--calendar-date-font-size);
+      margin-bottom: 6px;
+    }
+    .shift {
+      display: inline-block;
+      width: fit-content;
+      padding: 0.12em 0.5em;
+      border-radius: 999px;
+      background: var(--shift-soft);
+      color: var(--shift);
+      font-weight: 800;
+      font-size: var(--calendar-shift-font-size);
+      text-align: center;
+      margin: 0;
+    }
+    .coworkers {
+      font-size: var(--calendar-coworker-font-size);
+      line-height: var(--calendar-coworker-line-height);
+      color: var(--text);
+      white-space: normal;
+    }
+    .me-name {
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .date-row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      margin: 0 auto 2px;
+      text-align: center;
+      width: auto;
+      max-width: 100%;
+      white-space: nowrap;
+    }
+    .date-row .date {
+      margin-bottom: 0;
+    }
+    .calendar.personal-tight .date-row {
+      gap: 4px;
+      padding: 0;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .calendar.personal-tight .coworkers {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      width: max-content;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1px;
+      text-align: left;
+      line-height: 1.42;
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      align-self: stretch;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .coworker-line {
+      display: block;
+      width: auto;
+      max-width: 100%;
+    }
+    #printRoot {
+      display: none;
+    }
+    .muted { color: var(--muted); }
+    .table-wrap { overflow: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+      white-space: pre-wrap;
+    }
+    th { background: var(--surface-soft); }
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .small { font-size: 12px; color: var(--muted); }
+    .section-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .section-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+      flex: 1 1 auto;
+    }
+    .shift-stats {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+      word-break: break-word;
+      margin: 0;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .multi-check-wrap {
+      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      padding: 10px 12px;
+    }
+    .multi-check-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .multi-check-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      max-height: 220px;
+      overflow: auto;
+    }
+    .multi-check-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .multi-check-item input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      margin: 0;
+      flex: 0 0 auto;
+      accent-color: var(--selection-ink);
+      cursor: pointer;
+    }
+    .multi-check-name {
+      min-width: 0;
+      overflow: visible;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .multi-check-empty {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .overlap-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .capture-scope {
+      background: var(--surface);
+      border-radius: 12px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: var(--ui-radius);
+      padding: 0.5em 0.8em;
+      font-size: inherit;
+      font-weight: 700;
+      min-height: var(--ui-control-height);
+      cursor: pointer;
+    }
+    .btn:hover { border-color: var(--line-strong); }
+    
+    .compact-app.wrap {
+      max-width: 1380px;
+      padding: 6px 8px 8px;
+    }
+    .compact-grid.grid {
+      grid-template-columns: 395px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+    }
+    .control-card.card,
+    .result-card.card {
+      padding: 6px 8px;
+      border-radius: 12px;
+      min-width: 0;
+    }
+    .control-card {
+      position: sticky;
+      top: 6px;
+      overflow: visible;
+    }
+    .top-control-bar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      gap: calc(8px * var(--font-scale));
+      margin: 0 0 8px;
+      min-width: 0;
+      overflow: visible;
+    }
+    .compact-tabbar.tabbar {
+      margin: 0;
+      flex: 0 0 auto;
+      min-width: 0;
+      flex-wrap: nowrap;
+    }
+    .compact-tabbar.tabbar button {
+      padding: 7px 12px;
+    }
+    .control-row {
+      display: grid;
+      grid-template-columns: 108px minmax(0, 1fr);
+      align-items: center;
+      column-gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .person-row {
+      grid-template-columns: minmax(0, 1fr);
+      column-gap: 0;
+    }
+    .person-row .inline-label {
+      display: none;
+    }
+    .inline-label {
+      margin: 0;
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .inline-control {
+      min-width: 0;
+      overflow: visible;
+    }
+    .upload-inline input[type="file"] {
+      padding: 7px 10px;
+      font-size: 13px;
+    }
+    .person-inline {
+      display: grid;
+      grid-template-columns: minmax(170px, 5fr) 44px minmax(150px, 4fr);
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow: visible;
+    }
+    .person-inline > * {
+      min-width: 0;
+      max-width: none;
+      width: 100%;
+    }
+    .person-inline-wrap {
+      min-width: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow: visible;
+    }
+    #personSearch,
+    #personSelect {
+      width: 100%;
+      min-width: 0;
+      max-width: none;
+    }
+    #personSearch {
+      width: 100%;
+      min-width: 170px !important;
+    }
+    #clearPersonSearchBtn {
+      width: 44px;
+      min-width: 44px;
+      max-width: 44px;
+      padding-left: 0;
+      padding-right: 0;
+      justify-self: center;
+    }
+    #personSelect {
+      width: 100%;
+      min-width: 150px !important;
+      max-width: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      justify-self: stretch;
+    }
+    #personSelect option {
+      max-width: 100%;
+    }
+    .font-size-tools {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: calc(6px * var(--font-scale));
+      flex-wrap: nowrap;
+      flex: 0 0 auto;
+    }
+    .font-size-btn {
+      min-width: calc(44px * var(--font-scale));
+    }
+    .theme-toggle-btn {
+      min-width: calc(92px * var(--font-scale));
+      transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+    }
+    body[data-theme="dark"] .theme-toggle-btn {
+      background: var(--surface-soft);
+      color: #f8fafc;
+      border-color: var(--line-strong);
+    }
+    .person-clear-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      justify-self: stretch;
+      white-space: nowrap;
+      padding: 0;
+      min-height: var(--ui-control-height);
+      width: 100%;
+      min-width: calc(44px * var(--font-scale));
+      max-width: none;
+      flex: 0 0 auto;
+      grid-column: 2;
+    }
+    .person-clear-btn svg {
+      width: 1.08em;
+      height: 1.08em;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      pointer-events: none;
+    }
+    input[type="file"], input[type="text"], select {
+      padding: 0.5em 0.8em;
+      border-radius: var(--ui-radius);
+      font-size: inherit;
+      min-height: var(--ui-control-height);
+    }
+    .visually-hidden {
+      display: none !important;
+    }
+    body[data-active-tab="personal"] #overlapControls {
+      display: none !important;
+    }
+    body[data-active-tab="overlap"] #personalControls {
+      display: none !important;
+    }
+    .multi-section {
+      margin-top: 2px;
+    }
+    .multi-head-row {
+      grid-template-columns: minmax(0, 1fr);
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .multi-head-row .inline-label {
+      display: none;
+    }
+    .multi-head-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex-wrap: nowrap;
+    }
+    #clearMultiBtn {
+      flex: 0 0 auto;
+      min-width: calc(86px * var(--font-scale));
+      white-space: nowrap;
+      word-break: keep-all;
+      writing-mode: horizontal-tb;
+      text-orientation: mixed;
+      padding-left: 0.9em;
+      padding-right: 0.9em;
+    }
+    .multi-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+    }
+    .mini-btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: calc(9px * var(--font-scale));
+      padding: 0.45em 0.8em;
+      font-size: inherit;
+      font-weight: 700;
+      line-height: 1.2;
+      min-height: var(--ui-control-height);
+      cursor: pointer;
+    }
+    .mini-btn:hover {
+      border-color: var(--line-strong);
+    }
+    .multi-check-wrap {
+      margin-top: 0;
+      padding: 4px 6px;
+      border-radius: 10px;
+    }
+    .multi-check-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-auto-rows: minmax(28px, auto);
+      gap: 4px 8px;
+      height: calc(10 * 28px + 9 * 4px + 8px);
+      min-height: calc(10 * 28px + 9 * 4px + 8px);
+      max-height: calc(10 * 28px + 9 * 4px + 8px);
+      overflow: auto;
+      resize: vertical;
+      align-content: start;
+      padding-right: 1px;
+    }
+    .multi-check-item {
+      display: grid;
+      grid-template-columns: 15px minmax(0, 1fr);
+      align-items: center;
+      gap: 6px;
+      padding: 4px 6px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      line-height: 1.2;
+      text-decoration: none !important;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .multi-check-item.active {
+      border-color: var(--selection-ink);
+      background: var(--selection-ink-soft);
+    }
+    .multi-check-item.active .multi-check-name {
+      color: var(--selection-ink);
+      font-weight: 800;
+    }
+    .multi-check-item:focus,
+    .multi-check-item:active,
+    .multi-check-item:focus-visible,
+    .multi-check-item *,
+    .multi-check-item *:focus,
+    .multi-check-item *:active,
+    .multi-check-item *:focus-visible {
+      outline: none;
+      text-decoration: none !important;
+      box-shadow: none;
+    }
+    .multi-check-item input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+      margin: 0;
+      align-self: center;
+      justify-self: center;
+      appearance: auto;
+      -webkit-appearance: checkbox;
+      outline: none !important;
+      box-shadow: none !important;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .multi-check-item input[type="checkbox"]:focus,
+    .multi-check-item input[type="checkbox"]:active,
+    .multi-check-item input[type="checkbox"]:focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    .multi-check-name {
+      display: block;
+      min-width: 0;
+      font-weight: 700;
+      line-height: 1.2;
+      text-decoration: none !important;
+      border: 0;
+      box-shadow: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .multi-check-action-btn {
+      width: 100%;
+      min-width: 0 !important;
+      justify-self: stretch;
+      align-self: stretch;
+      text-align: center;
+      padding-left: 0.8em;
+      padding-right: 0.8em;
+    }
+    .chips {
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .chip {
+      padding: 5px 8px;
+      font-size: 12px;
+    }
+    .status {
+      margin-top: 8px;
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+    .section-head {
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .shift-stats {
+      font-size: 12px;
+      line-height: 1.3;
+    }
+    .stats-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .stats-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(30px * var(--font-scale));
+      padding: 0.4em 0.8em;
+      border: 1.5px solid var(--line);
+      border-radius: var(--ui-radius);
+      background: var(--surface);
+      font-size: inherit;
+      font-weight: 700;
+      line-height: 1.1;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .stats-chip.active {
+      border-color: var(--shift);
+      background: var(--shift-soft);
+      color: var(--shift);
+    }
+    .simple-overlap-summary {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0 0 2px;
+      line-height: 1.3;
+    }
+    .table-coworkers {
+      min-width: 150px;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .table-coworkers .coworkers-center {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100%;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .table-coworkers .coworker-line {
+      text-align: center;
+      width: 100%;
+    }
+    .actions {
+      gap: 6px;
+    }
+    .btn {
+      padding: 7px 10px;
+      font-size: 12px;
+    }
+    .capture-scope {
+      border-radius: 10px;
+    }
+    .calendar-resize-frame {
+      width: 100%;
+      min-width: var(--frame-min-width, 640px);
+      min-height: var(--frame-min-height, 420px);
+      max-width: none;
+      resize: both;
+      overflow: auto;
+      display: inline-block;
+      vertical-align: top;
+      border: 1px solid var(--line);
+      border-radius: calc(12px * var(--font-scale));
+      padding: calc(2px * var(--font-scale));
+      background: var(--surface);
+    }
+    .calendar-resize-frame .calendar-shell {
+      width: auto;
+      min-width: 100%;
+      height: 100%;
+      overflow: visible;
+      padding: 0;
+    }
+    .calendar-resize-frame .calendar {
+      min-width: 100%;
+      width: 100%;
+      height: 100%;
+    }
+    .calendar-resize-frame .day {
+      min-height: var(--calendar-day-resize-height, var(--calendar-day-min-height));
+    }
+    .calendar-shell {
+      padding-bottom: 0;
+      margin: 0;
+    }
+    .calendar {
+      min-width: var(--calendar-min-width);
+    }
+    .weekday, .day {
+      min-height: var(--calendar-day-min-height);
+      padding: var(--calendar-day-pad-y) var(--calendar-day-pad-x);
+    }
+    .weekday {
+      padding: 0 var(--calendar-day-pad-x);
+      min-height: var(--calendar-weekday-height);
+      height: var(--calendar-weekday-height);
+    }
+    .calendar.personal-tight .weekday,
+    .calendar.personal-tight .day {
+      padding: var(--calendar-day-pad-y) var(--calendar-day-pad-x);
+    }
+    .calendar.personal-tight .day {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      row-gap: 0;
+    }
+    .date-row {
+      margin-bottom: 0;
+    }
+    .date {
+      margin-bottom: 1px;
+      font-size: var(--calendar-date-font-size);
+    }
+    .shift {
+      font-size: var(--calendar-shift-font-size);
+      padding: 1px 6px;
+      background: var(--shift-soft);
+      color: var(--shift);
+    }
+    .coworkers {
+      font-size: var(--calendar-coworker-font-size);
+      line-height: var(--calendar-coworker-line-height);
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .coworker-line {
+      margin: 0;
+    }
+    .selected-people {
+      display: flex;
+      flex: 1 1 auto;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .person-pill {
+      display: inline-flex;
+      gap: 5px;
+      padding: 2px 7px;
+      font-size: 12px;
+      margin: 0 4px 4px 0;
+    }
+    .overlap-head-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 2px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .overlap-head-row .actions {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      justify-content: flex-end;
+    }
+    .overlap-head-row .selected-people {
+      padding-bottom: 2px;
+    }
+    .overlap-wrap {
+      gap: 2px;
+    }
+    .table-wrap {
+      margin-top: 0;
+    }
+    table {
+      font-size: 13px;
+    }
+    th, td {
+      padding: 5px 6px;
+      line-height: 1.3;
+    }
+
+
+    .calendar-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface);
+    }
+    .calendar-tool {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .calendar-tool input[type="range"] {
+      width: 88px;
+      margin: 0;
+      accent-color: var(--selection-ink);
+    }
+    .calendar-tool-value {
+      min-width: 28px;
+      text-align: right;
+      color: var(--text);
+      font-weight: 800;
+    }
+    .mobile-calendar-adjust {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .mini-adjust-btn {
+      min-height: auto;
+      padding: 4px 7px;
+      font-size: 12px;
+      line-height: 1.1;
+    }
+    .day[data-calendar-day] {
+      cursor: pointer;
+    }
+    .day[data-calendar-day]:hover {
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.16);
+    }
+    .day-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--modal-overlay);
+      z-index: 1000;
+      padding: 4px;
+    }
+    .day-modal[hidden] {
+      display: none !important;
+    }
+    .day-modal-panel {
+      width: min(1400px, calc(100vw - 4px));
+      max-width: calc(100vw - 4px);
+      max-height: min(90vh, 900px);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.24);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .day-modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface-soft);
+    }
+    .day-modal-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+    .day-modal-close {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      border-radius: 10px;
+      min-width: 34px;
+      height: 34px;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0;
+    }
+    .day-modal-body {
+      padding: 1px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 1px;
+      white-space: nowrap;
+    }
+    .day-modal-group {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 0;
+      background: var(--surface);
+      flex: 0 0 138px;
+      min-width: 138px;
+      height: auto;
+      white-space: normal;
+      align-self: stretch;
+      box-sizing: border-box;
+    }
+    .day-modal-group-head {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      margin: 0 0 1px;
+      padding: 0;
+      text-align: center;
+    }
+    .day-modal-names {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0;
+      line-height: 1.08;
+      font-size: 13px;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .day-modal-names .coworker-line {
+      display: block;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    body.modal-open {
+      overflow: hidden;
+    }
+
+
+    body[data-theme="dark"] .day.empty {
+      background: #000000;
+    }
+    body[data-theme="dark"] .day[data-calendar-day]:hover {
+      box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.26);
+    }
+    body[data-theme="dark"] .me-name {
+      color: #93c5fd;
+    }
+    body[data-theme="dark"] .day.day-selected {
+      outline-color: var(--selection-ink);
+    }
+    body[data-theme="dark"] .tabbar button.active,
+    body[data-theme="dark"] .mini-btn.active,
+    body[data-theme="dark"] .btn.active {
+      color: #ffffff;
+      border-color: var(--accent);
+    }
+    body[data-theme="dark"] .status,
+    body[data-theme="dark"] .chip,
+    body[data-theme="dark"] .person-pill,
+    body[data-theme="dark"] .multi-check-item,
+    body[data-theme="dark"] .day-modal-group,
+    body[data-theme="dark"] .table-wrap th,
+    body[data-theme="dark"] .table-wrap td {
+      background: var(--surface);
+    }
+    body[data-theme="dark"] .day-modal-head,
+    body[data-theme="dark"] .weekday,
+    body[data-theme="dark"] th {
+      background: var(--surface-soft);
+    }
+    body[data-theme="dark"] .calendar-resize-frame,
+    body[data-theme="dark"] .capture-scope,
+    body[data-theme="dark"] .result-card,
+    body[data-theme="dark"] .control-card,
+    body[data-theme="dark"] .day-modal-panel {
+      background: var(--card);
+    }
+    body,
+    button,
+    input,
+    select,
+    table,
+    th,
+    td,
+    .title,
+    .sub,
+    .card h2,
+    .tabbar button,
+    .inline-label,
+    .hint,
+    .status,
+    .chip,
+    .person-pill,
+    .multi-check-item,
+    .multi-check-empty,
+    .simple-overlap-summary,
+    .shift-stats,
+    .small,
+    .section-title,
+    .calendar-tool,
+    .calendar-tool-value,
+    .date,
+    .shift,
+    .coworkers,
+    .weekday,
+    .day-modal-title,
+    .day-modal-names,
+    .day-modal-close {
+      font-size: var(--ui-font-size) !important;
+    }
+    .actions,
+    .stats-chips,
+    .chips,
+    .selected-people,
+    .multi-toolbar,
+    .control-row,
+    .person-inline,
+    .person-inline-wrap,
+    .multi-check-list {
+      gap: calc(8px * var(--font-scale));
+    }
+    .compact-app.wrap {
+      padding: calc(6px * var(--font-scale)) calc(8px * var(--font-scale)) calc(8px * var(--font-scale));
+    }
+    .compact-grid.grid {
+      gap: calc(8px * var(--font-scale));
+    }
+    .control-card.card,
+    .result-card.card {
+      padding: calc(8px * var(--font-scale)) calc(10px * var(--font-scale));
+      border-radius: calc(12px * var(--font-scale));
+    }
+    .control-row {
+      grid-template-columns: calc(108px * var(--font-scale)) minmax(0, 1fr);
+      column-gap: calc(10px * var(--font-scale));
+      margin-bottom: calc(8px * var(--font-scale));
+    }
+    .compact-tabbar.tabbar button {
+      padding: 0.5em 0.8em;
+    }
+    .multi-check-wrap {
+      padding: calc(4px * var(--font-scale)) calc(6px * var(--font-scale));
+      border-radius: calc(10px * var(--font-scale));
+    }
+    .multi-check-list {
+      min-height: calc(160px * var(--font-scale));
+      max-height: min(calc(520px * var(--font-scale)), calc(100vh - 150px));
+    }
+    .section-head {
+      margin-bottom: calc(4px * var(--font-scale));
+    }
+    .table-wrap table {
+      width: 100%;
+    }
+
+    .multi-check-wrap {
+      overflow: visible;
+    }
+    .multi-check-list {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      overflow: visible !important;
+      resize: none !important;
+    }
+
+    @media (max-width: 960px) {
+      .theme-toggle-btn {
+        min-width: calc(82px * var(--font-scale));
+      }
+      .grid, .two-cols { grid-template-columns: 1fr; }
+      .wrap { padding: 10px; }
+      .card { padding: 10px; }
+      .compact-grid.grid { grid-template-columns: 1fr; }
+      .control-card { position: static; }
+      .control-row {
+        grid-template-columns: 86px minmax(0, 1fr);
+        row-gap: 0;
+        column-gap: 8px;
+        align-items: center;
+      }
+      .person-row {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+      }
+      .top-control-bar {
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        overflow: visible;
+      }
+      .compact-tabbar.tabbar {
+        flex-wrap: nowrap;
+        flex: 0 0 auto;
+      }
+      .compact-tabbar.tabbar button {
+        white-space: nowrap;
+      }
+      .person-inline-wrap {
+        width: 100%;
+        max-width: 100%;
+        overflow: visible;
+      }
+      .person-inline {
+        display: grid;
+        grid-template-columns: minmax(160px, 5fr) 44px minmax(140px, 4fr);
+        gap: 8px;
+        width: 100%;
+        max-width: 100%;
+      }
+      #personSearch {
+        width: 100%;
+        min-width: 160px !important;
+      }
+      #clearPersonSearchBtn {
+        width: 44px;
+        min-width: 44px;
+        max-width: 44px;
+      }
+      #personSelect {
+        width: 100%;
+        min-width: 140px !important;
+        max-width: none;
+      }
+      #personSearch,
+      #personSelect {
+        width: 100%;
+        max-width: none;
+      }
+      .multi-head-row {
+        grid-template-columns: minmax(0, 1fr);
+        row-gap: 0;
+      }
+      .multi-head-inline { flex-wrap: nowrap; gap: 6px; align-items: center; }
+      #clearMultiBtn { min-width: calc(78px * var(--font-scale)); }
+      .multi-toolbar {
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+      }
+      .mobile-calendar-adjust { display: inline-flex; }
+      .calendar-resize-frame {
+        resize: none;
+        width: 100% !important;
+        min-width: 100% !important;
+      }
+      .calendar {
+        min-width: 100%;
+        width: 100%;
+        gap: 0;
+      }
+      .calendar.personal-tight { gap: 0; }
+      .weekday, .day {
+        min-height: 92px;
+        padding: 3px 2px;
+        border-radius: 0;
+      }
+      .calendar.personal-tight .weekday, .calendar.personal-tight .day { border-radius: 0; padding: 3px 1px; }
+      .weekday {
+        padding: 0;
+        border-radius: 0;
+      }
+      .date { font-size: 13px; margin-bottom: 2px; }
+      .shift { font-size: 12px; padding: 1px 5px; }
+      .coworkers { font-size: 12px; line-height: 1.28; }
+      .multi-check-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-auto-rows: minmax(28px, auto);
+      }
+      .overlap-head-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 6px;
+      }
+      .overlap-head-row .actions {
+        gap: 4px;
+      }
+      .selected-people {
+        gap: 4px;
+      }
+      .person-pill {
+        margin: 0;
+      }
+      .day-modal {
+        padding: 2px;
+        align-items: stretch;
+      }
+      .day-modal-panel {
+        width: calc(100vw - 8px);
+        max-width: calc(100vw - 4px);
+        max-height: calc(100vh - 8px);
+        border-radius: 12px;
+      }
+      .day-modal-head {
+        padding: 5px 6px;
+      }
+      .day-modal-body {
+        padding: 1px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 1px;
+        white-space: normal;
+      }
+      .day-modal-group {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+        padding: 0;
+      }
+      .day-modal-group-head {
+        margin-bottom: 1px;
+        justify-content: center;
+      }
+      .day-modal-names {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 1px 6px;
+        line-height: 1.1;
+        text-align: center;
+      }
+      .day-modal-names .coworker-line {
+        width: auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .person-inline {
+        gap: 6px;
+      }
+      .person-clear-btn,
+      #clearPersonSearchBtn {
+        min-width: 44px;
+      }
+    }
+
+    @media (max-height: 480px) and (orientation: landscape) {
+      .person-inline {
+        gap: 6px;
+        grid-template-columns: minmax(180px, 5fr) 44px minmax(150px, 4fr);
+      }
+      #personSearch,
+      #personSelect,
+      .person-inline-wrap,
+      .inline-control {
+        max-width: 100%;
+        min-width: 0;
+      }
+      #personSearch {
+        width: 100%;
+        min-width: 180px !important;
+      }
+      #clearPersonSearchBtn {
+        width: 44px;
+        min-width: 44px;
+        max-width: 44px;
+      }
+      #personSelect {
+        width: 100%;
+        min-width: 150px !important;
+        max-width: none;
+      }
+    }
+
+    @media print {
+      body { background: var(--surface); }
+      body * { visibility: hidden !important; }
+      #printRoot, #printRoot * { visibility: visible !important; }
+      #printRoot {
+        display: block !important;
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+      #printRoot .calendar-shell { overflow: visible !important; }
+      #printRoot .calendar { min-width: 0; width: 100%; gap: 2px; }
+      #printRoot .weekday, #printRoot .day { min-height: 100px; break-inside: avoid; padding: 6px; }
+      #printRoot .weekday { padding: 2px 4px; }
+      #printRoot .btn, #printRoot .small { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap compact-app">
+    <div class="grid compact-grid">
+      <div class="card control-card">
+        <div class="top-control-bar">
+          <div class="tabbar compact-tabbar">
+            <button class="tab active" data-tab="personal">개별근무</button>
+            <button class="tab" data-tab="overlap">공동근무</button>
+          </div>
+          <div class="font-size-tools" aria-label="보기 설정">
+            <button type="button" class="mini-btn theme-toggle-btn" id="toggleThemeBtn" title="다크모드 전환" aria-pressed="false">다크모드</button>
+            <button type="button" class="mini-btn font-size-btn" id="decreaseFontBtn" title="글씨 줄이기">A-</button>
+            <button type="button" class="mini-btn font-size-btn" id="increaseFontBtn" title="글씨 키우기">A+</button>
+          </div>
+        </div>
+
+        <div class="control-row schedule-row">
+          <label for="scheduleSelect" class="inline-label">년월</label>
+          <div class="inline-control schedule-inline">
+            <select id="scheduleSelect" aria-label="근무표 년월 선택" disabled>
+              <option value="">근무표 검색 중...</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="personalControls" class="control-row person-row">
+          <label for="personSelect" class="inline-label visually-hidden">개별근무</label>
+          <div class="inline-control person-inline-wrap">
+            <div class="person-inline">
+              <input id="personSearch" type="text" placeholder="이름/초성 검색" aria-label="이름/초성 검색" disabled />
+              <button type="button" class="mini-btn person-clear-btn" id="clearPersonSearchBtn" aria-label="검색 지우기" title="검색 지우기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 3v6h-6"/></svg></button>
+              <select id="personSelect" aria-label="개별근무 선택" disabled></select>
+            </div>
+          </div>
+        </div>
+
+        <div id="overlapControls" class="multi-section">
+          <select id="multiSelect" multiple size="10" disabled class="visually-hidden" tabindex="-1" aria-hidden="true"></select>
+          <div id="multiCheckboxWrap" class="multi-check-wrap">
+            <div id="multiCheckboxList" class="multi-check-list">
+              <button type="button" class="mini-btn multi-check-action-btn" id="clearMultiBtn">모두해제</button>
+              <div class="multi-check-empty">근무표를 불러오면 목록이 표시됩니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="summary" class="chips"></div>
+        <div id="status" class="status">자동 갱신된 근무표 목록을 불러오는 중입니다.</div>
+      </div>
+
+      <div class="card print-scope result-card">
+        <div id="content"></div>
+        <div id="printRoot" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="dayDetailModal" class="day-modal" hidden>
+    <div class="day-modal-panel" role="dialog" aria-modal="true" aria-labelledby="dayDetailTitle">
+      <div class="day-modal-head">
+        <div id="dayDetailTitle" class="day-modal-title">전체 근무</div>
+        <button type="button" class="day-modal-close" id="closeDayDetailBtn" aria-label="닫기">×</button>
+      </div>
+      <div id="dayDetailBody" class="day-modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const app = {
+      records: [],
+      names: [],
+      nameOrder: new Map(),
+      schedules: [],
+      currentScheduleKey: '',
+      manifestUpdatedAt: '',
+      year: null,
+      month: null,
+      activeTab: 'personal',
+      fileName: '',
+      preselectedPerson: '',
+      activeShiftFilter: '',
+      fontScale: 1,
+      theme: 'light',
+      calendarFrames: {
+        personal: { width: null, height: null },
+        overlap: { width: null, height: null }
+      },
+      dayDetailHighlightNames: [],
+      holidays: new Set(),
+      selectedCalendarDays: {
+        personal: null,
+        overlap: null
+      }
+    };
+
+    const scheduleSelect = document.getElementById('scheduleSelect');
+    const personSearch = document.getElementById('personSearch');
+    const personSelect = document.getElementById('personSelect');
+    const clearPersonSearchBtn = document.getElementById('clearPersonSearchBtn');
+    const decreaseFontBtn = document.getElementById('decreaseFontBtn');
+    const increaseFontBtn = document.getElementById('increaseFontBtn');
+    const toggleThemeBtn = document.getElementById('toggleThemeBtn');
+    const multiSelect = document.getElementById('multiSelect');
+    const multiCheckboxWrap = document.getElementById('multiCheckboxWrap');
+    const multiCheckboxList = document.getElementById('multiCheckboxList');
+    const clearMultiBtn = document.getElementById('clearMultiBtn');
+    const statusBox = document.getElementById('status');
+    const content = document.getElementById('content');
+    const summary = document.getElementById('summary');
+    const printRoot = document.getElementById('printRoot');
+    const dayDetailModal = document.getElementById('dayDetailModal');
+    const dayDetailTitle = document.getElementById('dayDetailTitle');
+    const dayDetailBody = document.getElementById('dayDetailBody');
+    const closeDayDetailBtn = document.getElementById('closeDayDetailBtn');
+    const personalControls = document.getElementById('personalControls');
+    const overlapControls = document.getElementById('overlapControls');
+
+    // GitHub Actions가 자동으로 갱신하는 근무표 목록입니다.
+    // scripts/sync_schedule.py가 data/2026-07.html 같은 파일과 data/manifest.json을 만듭니다.
+    const SCHEDULE_MANIFEST_URL = 'data/manifest.json';
+
+    function applyPersonInlineRatio() {
+      if (!personSearch || !clearPersonSearchBtn || !personSelect) return;
+      personSearch.style.flex = '';
+      personSearch.style.width = '';
+      personSearch.style.minWidth = '';
+      personSearch.style.maxWidth = '';
+
+      clearPersonSearchBtn.style.flex = '';
+      clearPersonSearchBtn.style.width = '';
+      clearPersonSearchBtn.style.minWidth = '';
+      clearPersonSearchBtn.style.maxWidth = '';
+
+      personSelect.style.flex = '';
+      personSelect.style.width = '';
+      personSelect.style.minWidth = '';
+      personSelect.style.maxWidth = '';
+    }
+
+    function getRequestedPersonFromUrl() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        return String(params.get('name') || '').trim();
+      } catch (err) {
+        console.warn('URL 파라미터를 읽지 못했습니다.', err);
+        return '';
+      }
+    }
+
+    document.querySelectorAll('.tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        app.activeTab = btn.dataset.tab;
+        render();
+      });
+    });
+
+    updateControlVisibility();
+    requestAnimationFrame(applyPersonInlineRatio);
+
+    if (scheduleSelect) {
+      scheduleSelect.addEventListener('change', async () => {
+        const key = scheduleSelect.value || '';
+        if (!key || key === app.currentScheduleKey) return;
+        await loadScheduleByKey(key);
+      });
+    }
+
+    personSearch.addEventListener('input', () => {
+      bindPersonOptions(personSearch.value || '');
+      render();
+    });
+    personSelect.addEventListener('change', () => {
+      render();
+    });
+    multiSelect.addEventListener('change', () => {
+      syncMultiCheckboxStateFromSelect();
+      render();
+    });
+
+    if (clearMultiBtn) clearMultiBtn.addEventListener('click', clearMultiSelection);
+    if (decreaseFontBtn) decreaseFontBtn.addEventListener('click', () => changeFontScale(-0.1));
+    if (increaseFontBtn) increaseFontBtn.addEventListener('click', () => changeFontScale(0.1));
+    if (toggleThemeBtn) toggleThemeBtn.addEventListener('click', toggleTheme);
+    if (clearPersonSearchBtn) clearPersonSearchBtn.addEventListener('click', () => {
+      personSearch.value = '';
+      bindPersonOptions('');
+      if (!personSelect.disabled) personSelect.value = '';
+      render();
+      personSelect.focus();
+    });
+
+    if (closeDayDetailBtn) closeDayDetailBtn.addEventListener('click', closeDayDetailModal);
+    if (dayDetailModal) dayDetailModal.addEventListener('click', (e) => {
+      if (e.target === dayDetailModal) closeDayDetailModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dayDetailModal && !dayDetailModal.hidden) closeDayDetailModal();
+    });
+    applyTheme(loadSavedTheme());
+    applyUISizing();
+    initScheduleList();
+    window.addEventListener('resize', applyPersonInlineRatio);
+    window.addEventListener('orientationchange', () => setTimeout(applyPersonInlineRatio, 80));
+    window.addEventListener('load', () => {
+      applyPersonInlineRatio();
+      setTimeout(applyPersonInlineRatio, 120);
+    });
+
+    function loadSavedTheme() {
+      try {
+        const saved = localStorage.getItem('scheduleTheme');
+        if (saved === 'dark' || saved === 'light') return saved;
+      } catch (err) {
+        console.warn('테마 설정을 불러오지 못했습니다.', err);
+      }
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme = 'light') {
+      const resolved = theme === 'dark' ? 'dark' : 'light';
+      app.theme = resolved;
+      document.documentElement.setAttribute('data-theme', resolved);
+      document.body.setAttribute('data-theme', resolved);
+      try {
+        localStorage.setItem('scheduleTheme', resolved);
+      } catch (err) {
+        console.warn('테마 설정을 저장하지 못했습니다.', err);
+      }
+      if (toggleThemeBtn) {
+        const isDark = resolved === 'dark';
+        toggleThemeBtn.textContent = isDark ? '라이트모드' : '다크모드';
+        toggleThemeBtn.title = isDark ? '라이트모드로 전환' : '다크모드로 전환';
+        toggleThemeBtn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+      }
+    }
+
+    function toggleTheme() {
+      applyTheme(app.theme === 'dark' ? 'light' : 'dark');
+    }
+
+    function getScheduleKey(year, month) {
+      return `${year}-${String(month).padStart(2, '0')}`;
+    }
+
+    function makeScheduleLabel(key) {
+      const match = String(key || '').match(/^(20\d{2})-(0[1-9]|1[0-2])$/);
+      if (!match) return String(key || '근무표');
+      return `${match[1]}년 ${match[2]}월`;
+    }
+
+    function getFileNameFromUrl(url = '') {
+      try {
+        const clean = String(url || '').split('?')[0].split('#')[0];
+        return clean.split('/').filter(Boolean).pop() || '';
+      } catch (err) {
+        return '';
+      }
+    }
+
+    function normalizeManifestSchedule(item) {
+      const raw = typeof item === 'string' ? { key: item } : (item || {});
+      const key = String(raw.key || raw.month || raw.ym || '').trim();
+      const match = key.match(/^(20\d{2})-(0[1-9]|1[0-2])$/);
+      if (!match) return null;
+      const url = String(raw.url || `data/${key}.html`).trim();
+      return {
+        key,
+        year: Number(match[1]),
+        month: Number(match[2]),
+        label: String(raw.label || makeScheduleLabel(key)),
+        url,
+        fileName: String(raw.fileName || raw.filename || getFileNameFromUrl(url) || `${key}.html`),
+        sourceUrl: String(raw.sourceUrl || ''),
+        updatedAt: String(raw.updatedAt || '')
+      };
+    }
+
+    async function loadScheduleManifest() {
+      const url = `${SCHEDULE_MANIFEST_URL}?v=${Date.now()}`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`${SCHEDULE_MANIFEST_URL} 파일을 불러오지 못했습니다. (${res.status})`);
+      const manifest = await res.json();
+      const rawMonths = Array.isArray(manifest.months) ? manifest.months : [];
+      const schedules = rawMonths
+        .map(normalizeManifestSchedule)
+        .filter(Boolean)
+        .sort((a, b) => a.year - b.year || a.month - b.month);
+      return {
+        schedules,
+        updatedAt: String(manifest.updatedAt || ''),
+        source: manifest.source || null
+      };
+    }
+
+    function bindScheduleSelect() {
+      if (!scheduleSelect) return;
+      scheduleSelect.innerHTML = '';
+
+      if (!app.schedules.length) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '근무표 없음';
+        scheduleSelect.appendChild(opt);
+        scheduleSelect.disabled = true;
+        return;
+      }
+
+      for (const item of app.schedules) {
+        const opt = document.createElement('option');
+        opt.value = item.key;
+        opt.textContent = item.label;
+        scheduleSelect.appendChild(opt);
+      }
+      scheduleSelect.disabled = false;
+      scheduleSelect.value = app.currentScheduleKey || app.schedules[app.schedules.length - 1].key;
+    }
+
+    function getRequestedScheduleKeyFromUrl() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const ym = String(params.get('ym') || params.get('month') || '').trim();
+        const match = ym.match(/^(20\d{2})[-_.]?(0?[1-9]|1[0-2])$/);
+        if (!match) return '';
+        return `${match[1]}-${String(parseInt(match[2], 10)).padStart(2, '0')}`;
+      } catch (err) {
+        console.warn('년월 URL 파라미터를 읽지 못했습니다.', err);
+        return '';
+      }
+    }
+
+    function resetScheduleState(statusText = '') {
+      app.records = [];
+      app.names = [];
+      app.nameOrder = new Map();
+      app.year = null;
+      app.month = null;
+      app.fileName = '';
+      app.preselectedPerson = '';
+      app.activeShiftFilter = '';
+      app.selectedCalendarDays = { personal: null, overlap: null };
+      app.dayDetailHighlightNames = [];
+      personSearch.value = '';
+      personSearch.disabled = true;
+      personSelect.innerHTML = '';
+      personSelect.disabled = true;
+      multiSelect.innerHTML = '';
+      multiSelect.disabled = true;
+      renderMultiCheckboxes();
+      summary.innerHTML = '';
+      printRoot.innerHTML = '';
+      content.innerHTML = '<div class="muted">년월을 선택하면 근무표가 표시됩니다.</div>';
+      setStatus(statusText);
+    }
+
+    async function initScheduleList() {
+      resetScheduleState('자동 갱신된 근무표 목록을 불러오는 중입니다.');
+      try {
+        const manifest = await loadScheduleManifest();
+        const schedules = manifest.schedules;
+        app.schedules = schedules;
+        app.manifestUpdatedAt = manifest.updatedAt || '';
+        const requestedKey = getRequestedScheduleKeyFromUrl();
+        app.currentScheduleKey = schedules.some(item => item.key === requestedKey)
+          ? requestedKey
+          : (schedules.length ? schedules[schedules.length - 1].key : '');
+        bindScheduleSelect();
+
+        if (!schedules.length) {
+          setStatus('근무표를 찾지 못했습니다. GitHub Actions 실행 후 data/manifest.json과 data/YYYY-MM.html 파일이 생성되었는지 확인해 주세요.');
+          return;
+        }
+
+        await loadScheduleByKey(app.currentScheduleKey);
+      } catch (err) {
+        console.error(err);
+        setStatus('근무표 목록을 불러오지 못했습니다. GitHub Pages에서 실행 중인지, data/manifest.json 파일이 있는지 확인해 주세요.\n' + err.message);
+      }
+    }
+
+    async function loadScheduleByKey(key, options = {}) {
+      const schedule = app.schedules.find(item => item.key === key);
+      if (!schedule) return;
+      app.currentScheduleKey = schedule.key;
+      if (scheduleSelect) scheduleSelect.value = schedule.key;
+      await loadScheduleFromUrl(schedule, options);
+    }
+
+    async function loadScheduleFromUrl(schedule, options = {}) {
+      const statusText = options.statusText || `${schedule.label} 근무표를 불러오는 중입니다...`;
+      try {
+        setStatus(statusText);
+        const res = await fetch(schedule.url, { cache: 'no-store' });
+        if (!res.ok) throw new Error(`${schedule.url} 파일을 불러오지 못했습니다. (${res.status})`);
+
+        const buffer = await res.arrayBuffer();
+        const rows = parseArrayBuffer(buffer, schedule.fileName);
+        app.fileName = schedule.fileName || '';
+        const parsed = extractSchedule(rows, app.fileName);
+        app.records = parsed.records;
+        app.names = parsed.names;
+        app.nameOrder = new Map(parsed.names.map((name, index) => [name, index]));
+        app.year = parsed.year;
+        app.month = parsed.month;
+        app.preselectedPerson = getRequestedPersonFromUrl() || guessPersonFromFileName(app.fileName, parsed.names);
+        app.activeShiftFilter = '';
+        app.selectedCalendarDays = { personal: null, overlap: null };
+        app.holidays = await loadKoreanHolidays(app.year);
+        bindSelectors();
+        renderSummary(parsed);
+        setStatus('');
+        render();
+      } catch (err) {
+        console.error(err);
+        setStatus('근무표 처리 중 오류가 발생했습니다.\n' + err.message);
+      }
+    }
+
+    function applyUISizing() {
+      const fontScale = Math.min(1.8, Math.max(0.8, Number(app.fontScale || 1)));
+      const root = document.documentElement.style;
+      root.setProperty('--font-scale', String(fontScale));
+      root.setProperty('--ui-font-size', `${14 * fontScale}px`);
+      root.setProperty('--ui-gap', `${8 * fontScale}px`);
+      root.setProperty('--ui-radius', `${10 * fontScale}px`);
+      root.setProperty('--ui-control-height', `${36 * fontScale}px`);
+      root.setProperty('--calendar-min-width', `630px`);
+      root.setProperty('--calendar-day-min-height', `102px`);
+      root.setProperty('--calendar-weekday-height', `20px`);
+      root.setProperty('--calendar-day-pad-y', `3px`);
+      root.setProperty('--calendar-day-pad-x', `1px`);
+      root.setProperty('--calendar-date-font-size', `${14 * fontScale}px`);
+      root.setProperty('--calendar-shift-font-size', `${14 * fontScale}px`);
+      root.setProperty('--calendar-coworker-font-size', `${14 * fontScale}px`);
+      root.setProperty('--calendar-coworker-line-height', `1.35`);
+      syncCalendarResizeFrames();
+    }
+
+    function changeFontScale(delta) {
+      app.fontScale = Math.min(1.8, Math.max(0.8, Number((Number(app.fontScale || 1) + delta).toFixed(2))));
+      applyUISizing();
+    }
+
+    function getCalendarFrameState(tabKey) {
+      return (app.calendarFrames && app.calendarFrames[tabKey]) || { width: null, height: null };
+    }
+
+    function getCalendarRowCount() {
+      if (!app.year || !app.month) return 6;
+      const totalDays = new Date(app.year, app.month, 0).getDate();
+      const firstDay = new Date(app.year, app.month - 1, 1).getDay();
+      return Math.ceil((firstDay + totalDays) / 7);
+    }
+
+    function getRecommendedCalendarMetrics(items = [], options = {}) {
+      const rowCount = getCalendarRowCount();
+      const fontScale = Number(app.fontScale || 1);
+      const maxCoworkers = items.reduce((maxCount, item) => {
+        if (!item || item.shift === 'OFF') return maxCount;
+        const count = Array.isArray(item.coworkers) ? item.coworkers.length : 0;
+        return Math.max(maxCount, count);
+      }, 0);
+      const coworkerCount = options.showCoworkers ? Math.max(1, maxCoworkers) : 1;
+      const baseDayHeight = 38 + (coworkerCount * 17 * fontScale);
+      const dayHeight = Math.max(100 * fontScale, baseDayHeight);
+      const weekdayHeight = 20 * fontScale;
+      const defaultHeight = Math.max(420 * fontScale, 18 + weekdayHeight + (rowCount * dayHeight));
+      const minHeight = Math.max(400 * fontScale, defaultHeight);
+      const baseCellWidth = options.showCoworkers
+        ? Math.max(100 * fontScale, 74 + (coworkerCount * 4 * fontScale))
+        : Math.max(92 * fontScale, 88);
+      const minWidth = Math.max(700, Math.min(980, Math.round(baseCellWidth * 7)));
+      return {
+        minWidth,
+        minHeight,
+        defaultHeight
+      };
+    }
+
+    function renderResizableCalendar(calendarMarkup, tabKey, captureId, items = [], options = {}) {
+      const frame = getCalendarFrameState(tabKey);
+      const metrics = getRecommendedCalendarMetrics(items, options);
+      const mobileDefaultWidth = window.matchMedia('(max-width: 960px)').matches ? Math.round(metrics.minWidth) : null;
+      const widthStyle = frame.width
+        ? `width:${Math.max(Math.round(frame.width), Math.round(metrics.minWidth))}px;`
+        : (mobileDefaultWidth ? `width:${mobileDefaultWidth}px;` : 'width:100%;');
+      const heightStyle = `height:${Math.max(Math.round(frame.height || metrics.defaultHeight), Math.round(metrics.minHeight))}px;`;
+      return `
+        <div id="${captureId}" class="capture-scope">
+          <div class="calendar-resize-frame" data-calendar-frame="${tabKey}" style="--frame-min-width:${Math.round(metrics.minWidth)}px;--frame-min-height:${Math.round(metrics.minHeight)}px;${widthStyle}${heightStyle}">
+            ${calendarMarkup}
+          </div>
+        </div>
+      `;
+    }
+
+    let calendarFrameResizeObserver = null;
+    function bindCalendarFrameResize(tabKey) {
+      if (calendarFrameResizeObserver) calendarFrameResizeObserver.disconnect();
+      const frame = document.querySelector(`[data-calendar-frame="${tabKey}"]`);
+      if (!frame || !window.ResizeObserver) return;
+
+      const syncFrameMetrics = () => {
+        const frameWidth = Math.max(frame.clientWidth, frame.getBoundingClientRect().width || 0);
+        const frameHeight = Math.max(frame.clientHeight, frame.getBoundingClientRect().height || 0);
+        if (!app.calendarFrames) app.calendarFrames = {};
+        if (!app.calendarFrames[tabKey]) app.calendarFrames[tabKey] = { width: null, height: null };
+        app.calendarFrames[tabKey].width = frameWidth;
+        app.calendarFrames[tabKey].height = frameHeight;
+
+        const weekdayHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--calendar-weekday-height')) || 20;
+        const rowCount = getCalendarRowCount();
+        const gapTotal = Math.max(0, rowCount + 1) * 2;
+        const availableHeight = Math.max(260, frameHeight - weekdayHeight - gapTotal - 6);
+        const dayHeight = Math.max(82, availableHeight / rowCount);
+        frame.style.setProperty('--calendar-day-resize-height', `${dayHeight}px`);
+      };
+
+      syncFrameMetrics();
+      calendarFrameResizeObserver = new ResizeObserver(syncFrameMetrics);
+      calendarFrameResizeObserver.observe(frame);
+    }
+
+    function syncCalendarResizeFrames() {
+      const activeFrame = document.querySelector('[data-calendar-frame]');
+      if (!activeFrame) return;
+      const tabKey = activeFrame.getAttribute('data-calendar-frame');
+      if (tabKey) bindCalendarFrameResize(tabKey);
+    }
+
+    function adjustCalendarFrameSize(tabKey, axis, delta) {
+      const frame = document.querySelector(`[data-calendar-frame="${tabKey}"]`);
+      if (!frame) return;
+      const computed = getComputedStyle(frame);
+      const minWidth = parseFloat(computed.getPropertyValue('--frame-min-width')) || 640;
+      const minHeight = parseFloat(computed.getPropertyValue('--frame-min-height')) || 420;
+      const currentWidth = Math.max(frame.getBoundingClientRect().width || 0, app.calendarFrames?.[tabKey]?.width || 0, minWidth);
+      const currentHeight = Math.max(frame.getBoundingClientRect().height || 0, app.calendarFrames?.[tabKey]?.height || 0, minHeight);
+      const nextWidth = axis === 'width' ? Math.max(minWidth, currentWidth + delta) : currentWidth;
+      const nextHeight = axis === 'height' ? Math.max(minHeight, currentHeight + delta) : currentHeight;
+      if (!app.calendarFrames) app.calendarFrames = {};
+      app.calendarFrames[tabKey] = { width: nextWidth, height: nextHeight };
+      render();
+    }
+
+    function bindCalendarAdjustButtons(tabKey) {
+      content.querySelectorAll(`[data-calendar-adjust^="${tabKey}:"]`).forEach(btn => {
+        btn.addEventListener('click', () => {
+          const raw = btn.getAttribute('data-calendar-adjust') || '';
+          const [, axis, deltaText] = raw.split(':');
+          const delta = Number(deltaText || '0');
+          if (!axis || !delta) return;
+          adjustCalendarFrameSize(tabKey, axis, delta);
+        });
+      });
+    }
+
+    function applySelectedCalendarDay(tabKey) {
+      const selectedDay = app.selectedCalendarDays && Number(app.selectedCalendarDays[tabKey] || 0);
+      content.querySelectorAll('[data-calendar-day]').forEach(cell => {
+        const day = Number(cell.getAttribute('data-calendar-day') || '0');
+        cell.classList.toggle('day-selected', !!selectedDay && day === selectedDay);
+      });
+    }
+
+    function bindCalendarDayEvents(tabKey, highlightedNames = []) {
+      app.dayDetailHighlightNames = Array.isArray(highlightedNames) ? [...highlightedNames] : [];
+      applySelectedCalendarDay(tabKey);
+      content.querySelectorAll('[data-calendar-day]').forEach(cell => {
+        cell.addEventListener('click', () => {
+          const day = Number(cell.getAttribute('data-calendar-day') || '0');
+          if (!day) return;
+          const selectedDay = app.selectedCalendarDays && Number(app.selectedCalendarDays[tabKey] || 0);
+          if (selectedDay === day) {
+            openDayDetailModal(day, app.dayDetailHighlightNames);
+            return;
+          }
+          if (!app.selectedCalendarDays) {
+            app.selectedCalendarDays = { personal: null, overlap: null };
+          }
+          app.selectedCalendarDays[tabKey] = day;
+          applySelectedCalendarDay(tabKey);
+        });
+      });
+    }
+
+    function getShiftOrderValue(label) {
+      const normalized = String(label || '').trim().toUpperCase();
+      if (normalized === 'D1') return 0;
+      if (normalized === 'E1') return 1;
+      if (normalized === 'N1') return 2;
+      if (normalized === 'OFF') return 3;
+      return 100;
+    }
+
+    function compareShiftLabels(a, b) {
+      const orderDiff = getShiftOrderValue(a) - getShiftOrderValue(b);
+      if (orderDiff !== 0) return orderDiff;
+      return String(a || '').localeCompare(String(b || ''), 'ko', { numeric: true });
+    }
+
+    function compareNamesByFileOrder(a, b) {
+      const map = app.nameOrder instanceof Map ? app.nameOrder : new Map(app.names.map((name, index) => [name, index]));
+      const max = Number.MAX_SAFE_INTEGER;
+      const ai = map.has(a) ? map.get(a) : max;
+      const bi = map.has(b) ? map.get(b) : max;
+      if (ai !== bi) return ai - bi;
+      return String(a || '').localeCompare(String(b || ''), 'ko', { numeric: true });
+    }
+
+    function getDayRecords(day) {
+      return app.records
+        .filter(record => record.day === day)
+        .sort((a, b) => compareShiftLabels(getShiftLabel(a), getShiftLabel(b)) || compareNamesByFileOrder(a.name, b.name));
+    }
+
+    function getDayShiftGroups(day) {
+      const groups = new Map();
+      for (const record of getDayRecords(day)) {
+        const label = getShiftLabel(record) || record.shift || '';
+        if (!groups.has(label)) groups.set(label, []);
+        groups.get(label).push(record.name);
+      }
+      return Array.from(groups.entries())
+        .sort((a, b) => compareShiftLabels(a[0], b[0]))
+        .map(([shift, names]) => ({ shift, names: [...names].sort(compareNamesByFileOrder) }));
+    }
+
+    function openDayDetailModal(day, highlightedNames = []) {
+      const groups = getDayShiftGroups(day);
+      const dateText = `${app.year}-${String(app.month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      dayDetailTitle.textContent = `${dateText} 전체 근무`;
+      if (!groups.length) {
+        dayDetailBody.innerHTML = '<div class="muted">표시할 근무가 없습니다.</div>';
+      } else {
+        dayDetailBody.innerHTML = groups.map(group => `
+          <div class="day-modal-group">
+            <div class="day-modal-group-head">
+              <span class="shift">${escapeHtml(group.shift)}</span>
+            </div>
+            <div class="day-modal-names">${buildCoworkerHtml(group.names, highlightedNames)}</div>
+          </div>
+        `).join('');
+      }
+      dayDetailModal.hidden = false;
+      document.body.classList.add('modal-open');
+    }
+
+    function closeDayDetailModal() {
+      dayDetailModal.hidden = true;
+      document.body.classList.remove('modal-open');
+    }
+
+    function setStatus(text) {
+      statusBox.textContent = text;
+    }
+
+    function formatKoreanDateTime(value) {
+      if (!value) return '';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      const pad = n => String(n).padStart(2, '0');
+      return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+    }
+
+    function renderSummary(parsed) {
+      summary.innerHTML = '';
+      const current = app.schedules.find(item => item.key === app.currentScheduleKey) || null;
+      const items = [
+        `연월: ${parsed.year}-${String(parsed.month).padStart(2,'0')}`,
+        `대상자: ${parsed.names.length}명`,
+        `근무일수: ${parsed.dayCount}일`
+      ];
+      const updatedAt = current?.updatedAt || app.manifestUpdatedAt || '';
+      if (updatedAt) items.push(`갱신: ${formatKoreanDateTime(updatedAt)}`);
+      items.forEach(t => {
+        const span = document.createElement('span');
+        span.className = 'chip';
+        span.textContent = t;
+        summary.appendChild(span);
+      });
+    }
+
+    function parseArrayBuffer(buffer, fileName = '') {
+      const name = String(fileName || '').toLowerCase();
+
+      if (name.endsWith('.xlsx') || name.endsWith('.xls')) {
+        try {
+          const wb = XLSX.read(buffer, { type: 'array' });
+          const ws = wb.Sheets[wb.SheetNames[0]];
+          return XLSX.utils.sheet_to_json(ws, { header: 1, raw: false, defval: '' });
+        } catch (e) {
+          // HTML 형식인데 확장자만 xls인 근무표도 지원합니다.
+        }
+      }
+
+      const text = new TextDecoder('utf-8').decode(buffer);
+      return parseHtmlTable(text);
+    }
+
+    function parseHtmlTable(html) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const table = doc.querySelector('table');
+      if (!table) throw new Error('HTML 표를 찾지 못했습니다.');
+      const rows = [];
+      table.querySelectorAll('tr').forEach(tr => {
+        const row = [];
+        tr.querySelectorAll('th, td').forEach(cell => {
+          const text = (cell.textContent || '').replace(/\s+/g, ' ').trim();
+          const colspan = parseInt(cell.getAttribute('colspan') || '1', 10);
+          row.push(text);
+          for (let i = 1; i < colspan; i++) row.push('');
+        });
+        rows.push(row);
+      });
+      return rows;
+    }
+
+    function extractSchedule(rows, fileName = '') {
+      if (!rows || rows.length < 3) throw new Error('시트 구조를 해석할 수 없습니다.');
+
+      const normalized = rows.map(r => r.map(v => String(v ?? '').trim()));
+      const dayHeaderIdx = findDayHeaderRow(normalized);
+      if (dayHeaderIdx < 0 || dayHeaderIdx + 1 >= normalized.length) throw new Error('날짜 헤더를 찾지 못했습니다.');
+
+      const dayRow = normalized[dayHeaderIdx];
+      const weekdayRow = normalized[dayHeaderIdx + 1] || [];
+      const dayColumns = [];
+      for (let c = 0; c < dayRow.length; c++) {
+        if (/^\d{1,2}$/.test(dayRow[c])) dayColumns.push({ col: c, day: parseInt(dayRow[c], 10), weekday: weekdayRow[c] || '' });
+      }
+      if (!dayColumns.length) throw new Error('날짜 열을 찾지 못했습니다.');
+
+      const { year, month } = inferYearMonth(normalized, dayColumns.length, fileName);
+      const nameCol = findNameColumn(normalized, dayHeaderIdx, dayColumns[0].col);
+
+      const dataStart = dayHeaderIdx + 2;
+      const records = [];
+      const nameSet = new Set();
+
+      for (let r = dataStart; r < normalized.length; r++) {
+        const row = normalized[r];
+        if (!row || !row.some(Boolean)) continue;
+        const name = extractName(row, nameCol, dayColumns[0].col);
+        if (!name) continue;
+        if (isMetaName(name)) continue;
+
+        let hasShift = false;
+        for (const dc of dayColumns) {
+          const rawShift = (row[dc.col] || '').trim();
+          const shift = normalizeShift(rawShift);
+          if (!shift) continue;
+          hasShift = true;
+          records.push({
+            name,
+            day: dc.day,
+            date: `${year}-${String(month).padStart(2,'0')}-${String(dc.day).padStart(2,'0')}`,
+            weekday: dc.weekday,
+            rawShift,
+            shift,
+          });
+        }
+        if (hasShift) nameSet.add(name);
+      }
+
+      const names = Array.from(nameSet);
+      if (!names.length || !records.length) throw new Error('근무 데이터가 추출되지 않았습니다.');
+
+      return { records, names, year, month, dayCount: dayColumns.length };
+    }
+
+    function findDayHeaderRow(rows) {
+      for (let i = 0; i < Math.min(rows.length, 15); i++) {
+        const count = rows[i].filter(v => /^\d{1,2}$/.test(v)).length;
+        if (count >= 20) return i;
+      }
+      return -1;
+    }
+
+    function inferYearMonth(rows, dayCount, fileName = '') {
+      const joined = rows.slice(0, 8).flat().join(' ');
+      const textCandidates = [String(fileName || ''), joined];
+
+      for (const text of textCandidates) {
+        const m = text.match(/(20\d{2})[^\d]?(\d{2})/);
+        if (m) {
+          const year = parseInt(m[1], 10);
+          const month = parseInt(m[2], 10);
+          if (month >= 1 && month <= 12) return { year, month };
+        }
+      }
+
+      for (const text of textCandidates) {
+        const m = text.match(/(20\d{2})[-./년_\s]+(\d{1,2})/);
+        if (m) {
+          const year = parseInt(m[1], 10);
+          const month = parseInt(m[2], 10);
+          if (month >= 1 && month <= 12) return { year, month };
+        }
+      }
+
+      const now = new Date();
+      return { year: now.getFullYear(), month: now.getMonth() + 1 };
+    }
+
+    function findNameColumn(rows, dayHeaderIdx, dayStartCol) {
+      const searchRows = rows.slice(0, Math.min(dayHeaderIdx + 2, 8));
+      let fallback = -1;
+      for (let c = 0; c < dayStartCol; c++) {
+        const labels = searchRows.map(r => (r[c] || '').trim());
+        if (labels.some(v => /^(근무자|이름|성명)$/.test(v))) return c;
+        if (fallback < 0 && labels.some(v => /(근무자|이름|성명)/.test(v))) fallback = c;
+      }
+      if (fallback >= 0) return fallback;
+      return Math.min(1, Math.max(0, dayStartCol - 1));
+    }
+
+    function extractName(row, nameCol, dayStartCol) {
+      const direct = ((row[nameCol] || '') + '').trim();
+      if (isLikelyPersonName(direct)) return direct;
+
+      const candidates = row
+        .slice(0, Math.min(dayStartCol, 6))
+        .map(v => (v || '').trim())
+        .filter(v => isLikelyPersonName(v));
+      if (!candidates.length) return '';
+      return candidates[0];
+    }
+
+    function isLikelyPersonName(value) {
+      if (!value) return false;
+      if (/^\d+$/.test(value)) return false;
+      if (/^\d{4}[-./]\d{1,2}[-./]\d{1,2}$/.test(value)) return false;
+      if (/^(중환자실|병동|부서|사번|입사일|직책)$/i.test(value)) return false;
+      if (value.length > 12) return false;
+      return /[가-힣A-Za-z]/.test(value);
+    }
+
+    function isMetaName(name) {
+      const blocked = ['날짜', '근무', '합계', '통계', '비고', '구분'];
+      return blocked.some(word => name.includes(word));
+    }
+
+    function normalizeShift(v) {
+      if (!v) return '';
+      const raw = String(v).replace(/\s+/g, '').trim();
+      if (!raw) return '';
+      const upper = raw.toUpperCase();
+      if (/^(OFF|O|휴무|연차|반차|휴가|오프|X)$/.test(upper)) return 'OFF';
+      return upper;
+    }
+
+    function getChoseong(text) {
+      const CHO = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ','ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+      return String(text || '').split('').map(ch => {
+        const code = ch.charCodeAt(0);
+        if (code >= 0xAC00 && code <= 0xD7A3) {
+          return CHO[Math.floor((code - 0xAC00) / 588)] || ch;
+        }
+        return ch;
+      }).join('');
+    }
+
+    function normalizeSearchText(text) {
+      return String(text || '').trim().toLowerCase();
+    }
+
+    function isSubsequence(target, keyword) {
+      if (!keyword) return true;
+      let idx = 0;
+      for (const ch of String(target || '')) {
+        if (ch === keyword[idx]) idx += 1;
+        if (idx >= keyword.length) return true;
+      }
+      return false;
+    }
+
+    function getPersonSearchScore(name, keyword) {
+      const normalizedName = normalizeSearchText(name);
+      const normalizedKeyword = normalizeSearchText(keyword);
+      if (!normalizedKeyword) return 1;
+
+      const choseongName = normalizeSearchText(getChoseong(normalizedName));
+      let score = 0;
+
+      if (normalizedName === normalizedKeyword) score = Math.max(score, 1000);
+      if (choseongName === normalizedKeyword) score = Math.max(score, 980);
+      if (normalizedName.startsWith(normalizedKeyword)) score = Math.max(score, 900 - Math.max(0, normalizedName.length - normalizedKeyword.length));
+      if (choseongName.startsWith(normalizedKeyword)) score = Math.max(score, 880 - Math.max(0, choseongName.length - normalizedKeyword.length));
+      if (normalizedName.includes(normalizedKeyword)) score = Math.max(score, 700 - normalizedName.indexOf(normalizedKeyword));
+      if (choseongName.includes(normalizedKeyword)) score = Math.max(score, 680 - choseongName.indexOf(normalizedKeyword));
+      if (isSubsequence(normalizedName, normalizedKeyword)) score = Math.max(score, 520 - (normalizedName.length - normalizedKeyword.length));
+      if (isSubsequence(choseongName, normalizedKeyword)) score = Math.max(score, 500 - (choseongName.length - normalizedKeyword.length));
+
+      return Math.max(score, 0);
+    }
+
+    function matchesPersonSearch(name, keyword) {
+      return getPersonSearchScore(name, keyword) > 0;
+    }
+
+
+    async function loadKoreanHolidays(year) {
+      try {
+        const res = await fetch(`https://holidays.hyunbin.page/${year}.json`, { cache: 'no-store' });
+        if (!res.ok) throw new Error('공휴일 데이터를 가져오지 못했습니다.');
+        const data = await res.json();
+        return new Set(Object.keys(data || {}));
+      } catch (err) {
+        console.warn('공휴일 로딩 실패', err);
+        return new Set();
+      }
+    }
+
+    function isHolidayDate(year, month, day) {
+      const key = `${year}-${String(month).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+      return app.holidays && app.holidays.has(key);
+    }
+
+    function guessPersonFromFileName(fileName, names = []) {
+      const base = String(fileName || '').replace(/\.[^.]+$/, '').trim();
+      if (!base || !Array.isArray(names) || !names.length) return '';
+      const candidates = [...new Set(names)]
+        .filter(Boolean)
+        .sort((a, b) => b.length - a.length);
+      const tokens = base.split(/\s+/).filter(Boolean);
+      for (const token of tokens.slice().reverse()) {
+        const matched = candidates.find(name => token === name);
+        if (matched) return matched;
+      }
+      for (const name of candidates) {
+        if (base.endsWith(` ${name}`) || base.includes(` ${name} `)) return name;
+      }
+      return '';
+    }
+
+    function buildCoworkerHtml(names = [], highlightedNames = []) {
+      if (!Array.isArray(names) || !names.length) return '';
+      const highlightSet = new Set(highlightedNames || []);
+      return names.map((n, i) => {
+        const line = `${i + 1}. ${escapeHtml(n)}`;
+        return `<div class="coworker-line">${highlightSet.has(n) ? `<span class="me-name">${line}</span>` : line}</div>`;
+      }).join('');
+    }
+
+    function clearMultiSelection() {
+      Array.from(multiSelect.options).forEach(opt => {
+        opt.selected = false;
+      });
+      syncMultiCheckboxStateFromSelect();
+      render();
+    }
+
+
+    function bindSelectors() {
+      personSearch.value = app.preselectedPerson || '';
+      bindPersonOptions(personSearch.value || '');
+      if (app.preselectedPerson && app.names.includes(app.preselectedPerson)) {
+        personSelect.value = app.preselectedPerson;
+      }
+      multiSelect.innerHTML = '';
+      for (const name of app.names) {
+        const opt2 = document.createElement('option');
+        opt2.value = name;
+        opt2.textContent = name;
+        opt2.selected = false;
+        multiSelect.appendChild(opt2);
+      }
+      personSearch.disabled = false;
+      multiSelect.disabled = false;
+      renderMultiCheckboxes();
+      syncMultiCheckboxStateFromSelect();
+    }
+
+    function bindPersonOptions(filterText = '') {
+      const prevValue = personSelect.value;
+      const keyword = String(filterText || '').trim();
+      const rankedNames = !keyword
+        ? [...app.names]
+        : app.names
+            .map(name => ({ name, score: getPersonSearchScore(name, keyword) }))
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score || a.name.localeCompare(b.name, 'ko'))
+            .map(item => item.name);
+
+      personSelect.innerHTML = '';
+      if (!rankedNames.length) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = '검색 결과 없음';
+        personSelect.appendChild(opt);
+        personSelect.disabled = true;
+        return;
+      }
+
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = '선택해주세요';
+      personSelect.appendChild(placeholder);
+
+      for (const name of rankedNames) {
+        const opt = document.createElement('option');
+        opt.value = name;
+        opt.textContent = name;
+        personSelect.appendChild(opt);
+      }
+
+      personSelect.disabled = false;
+      if (keyword) personSelect.value = rankedNames[0] || '';
+      else if (rankedNames.includes(prevValue)) personSelect.value = prevValue;
+      else personSelect.value = '';
+    }
+
+    function renderMultiCheckboxes() {
+      multiCheckboxList.innerHTML = '';
+
+      if (clearMultiBtn) {
+        clearMultiBtn.classList.add('multi-check-action-btn');
+        clearMultiBtn.disabled = !app.names.length;
+        multiCheckboxList.appendChild(clearMultiBtn);
+      }
+
+      if (!app.names.length) {
+        const empty = document.createElement('div');
+        empty.className = 'multi-check-empty';
+        empty.textContent = '근무표를 불러오면 목록이 표시됩니다.';
+        multiCheckboxList.appendChild(empty);
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      const selectedNames = new Set(Array.from(multiSelect.selectedOptions).map(o => o.value));
+      for (const name of app.names) {
+        const label = document.createElement('label');
+        label.className = 'multi-check-item';
+        if (selectedNames.has(name)) label.classList.add('active');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.value = name;
+        checkbox.dataset.name = name;
+        checkbox.checked = selectedNames.has(name);
+        checkbox.disabled = multiSelect.disabled;
+
+        const syncNameSelection = (checked) => {
+          const option = Array.from(multiSelect.options).find(opt => opt.value === name);
+          if (option) option.selected = checked;
+          checkbox.checked = checked;
+          label.classList.toggle('active', checked);
+          render();
+        };
+
+        checkbox.addEventListener('click', (e) => e.stopPropagation());
+        checkbox.addEventListener('change', () => {
+          syncNameSelection(checkbox.checked);
+        });
+        label.addEventListener('click', (e) => {
+          if (e.target === checkbox) return;
+          e.preventDefault();
+          syncNameSelection(!checkbox.checked);
+        });
+
+        const text = document.createElement('span');
+        text.className = 'multi-check-name';
+        text.textContent = name;
+
+        label.appendChild(checkbox);
+        label.appendChild(text);
+        fragment.appendChild(label);
+      }
+      multiCheckboxList.appendChild(fragment);
+    }
+
+    function syncMultiCheckboxStateFromSelect() {
+      const selectedNames = new Set(Array.from(multiSelect.selectedOptions).map(o => o.value));
+      multiCheckboxList.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.checked = selectedNames.has(checkbox.value);
+        checkbox.disabled = multiSelect.disabled;
+        const item = checkbox.closest('.multi-check-item');
+        if (item) item.classList.toggle('active', checkbox.checked);
+      });
+    }
+
+    function getSelectedMultiNames() {
+      return Array.from(multiSelect.selectedOptions).map(o => o.value);
+    }
+
+    function removeSelectedPerson(name) {
+      Array.from(multiSelect.options).forEach(opt => {
+        if (opt.value === name) opt.selected = false;
+      });
+      syncMultiCheckboxStateFromSelect();
+      render();
+    }
+
+    function updateControlVisibility() {
+      const isPersonal = app.activeTab === 'personal';
+      document.body.setAttribute('data-active-tab', app.activeTab);
+      if (personalControls) {
+        personalControls.hidden = !isPersonal;
+        personalControls.style.display = isPersonal ? '' : 'none';
+        personalControls.setAttribute('aria-hidden', String(!isPersonal));
+        if (isPersonal) requestAnimationFrame(applyPersonInlineRatio);
+      }
+      if (overlapControls) {
+        overlapControls.hidden = isPersonal;
+        overlapControls.style.display = isPersonal ? 'none' : '';
+        overlapControls.setAttribute('aria-hidden', String(isPersonal));
+      }
+    }
+
+    function render() {
+      updateControlVisibility();
+      requestAnimationFrame(applyPersonInlineRatio);
+      if (!app.records.length) {
+        content.innerHTML = '<div class="muted">파일을 업로드하면 결과가 여기에 표시됩니다.</div>';
+        return;
+      }
+      if (app.activeTab === 'personal') renderPersonal();
+      else renderOverlap();
+    }
+
+    function renderPersonal() {
+      const name = personSelect.value || '';
+      if (!name) {
+        content.innerHTML = '<div class="muted">개별근무에서 이름을 선택하면 달력이 표시됩니다.</div>';
+        printRoot.innerHTML = '';
+        return;
+      }
+      const byDay = recordsForName(name).map(item => {
+        const coworkers = getNamesForDayShift(item.day, item.shift);
+        return {
+          ...item,
+          coworkers,
+          coworkerHtml: item.shift === 'OFF' ? '' : buildCoworkerHtml(coworkers, [name])
+        };
+      });
+      const shiftStats = getShiftStats(byDay);
+      const personalCalendarItems = byDay.map(item => ({
+        ...item,
+        shiftLabel: getShiftLabel(item)
+      }));
+      const personalCalendarMarkup = calendarHtml(personalCalendarItems, { showCoworkers: true, personalTight: true, highlightedShift: app.activeShiftFilter });
+      const personalHtml = `
+        <div class="section-head">
+          <div class="section-info">
+            <div class="stats-chips">${renderStatsChips(shiftStats, app.activeShiftFilter)}</div>
+          </div>
+          <div class="actions">
+            ${renderCalendarAdjustButtons('personal')}
+            <button type="button" class="btn" id="resetPersonalCalendarSizeBtn">달력크기 기본</button>
+            <button type="button" class="btn" id="printPersonalBtn">프린트</button>
+            <button type="button" class="btn" id="savePersonalPngBtn">PNG 저장</button>
+            <button type="button" class="btn" id="savePersonalPdfBtn">PDF 저장</button>
+          </div>
+        </div>
+        ${renderResizableCalendar(personalCalendarMarkup, 'personal', 'personalCapture', personalCalendarItems, { showCoworkers: true })}
+      `;
+      content.innerHTML = personalHtml;
+      printRoot.innerHTML = `<div class="stats-chips">${renderStatsChips(shiftStats, app.activeShiftFilter)}</div>${personalCalendarMarkup}`;
+
+      const resetSizeBtn = document.getElementById('resetPersonalCalendarSizeBtn');
+      const printBtn = document.getElementById('printPersonalBtn');
+      const pngBtn = document.getElementById('savePersonalPngBtn');
+      const pdfBtn = document.getElementById('savePersonalPdfBtn');
+      content.querySelectorAll('[data-shift-filter]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const value = btn.getAttribute('data-shift-filter') || '';
+          app.activeShiftFilter = app.activeShiftFilter === value ? '' : value;
+          if (!app.selectedCalendarDays) {
+            app.selectedCalendarDays = { personal: null, overlap: null };
+          }
+          app.selectedCalendarDays.personal = null;
+          render();
+        });
+      });
+      bindCalendarFrameResize('personal');
+      bindCalendarAdjustButtons('personal');
+      bindCalendarDayEvents('personal', [name]);
+      if (resetSizeBtn) resetSizeBtn.addEventListener('click', () => {
+        app.calendarFrames.personal = { width: null, height: null };
+        render();
+      });
+      if (printBtn) printBtn.addEventListener('click', async () => printElementAsImage(document.getElementById('personalCapture'), `${name} 개인 근무 달력`));
+      if (pngBtn) pngBtn.addEventListener('click', async () => saveElementAsPng(document.getElementById('personalCapture'), `${app.year}-${String(app.month).padStart(2,'0')}_${name}_개인근무달력.png`));
+      if (pdfBtn) pdfBtn.addEventListener('click', async () => saveElementAsPdf(document.getElementById('personalCapture'), `${app.year}-${String(app.month).padStart(2,'0')}_${name}_개인근무달력.pdf`));
+    }
+
+    function renderOverlap() {
+      const selected = getSelectedMultiNames();
+      printRoot.innerHTML = '';
+      if (selected.length < 2) {
+        content.innerHTML = '<div class="muted">공동근무는 2명 이상 선택하면 표시됩니다.</div>';
+        return;
+      }
+      const overlaps = findOverlaps(selected);
+      const selectedHtml = selected.map(name => `
+        <span class="person-pill">
+          <span class="me-name">${escapeHtml(name)}</span>
+          <button class="pill-x" type="button" data-remove-name="${escapeHtml(name)}" aria-label="${escapeHtml(name)} 제거">×</button>
+        </span>
+      `).join('');
+      const overlapCalendarItems = overlaps.map(item => ({
+        ...item,
+        rawShift: item.shift,
+        coworkerHtml: buildCoworkerHtml(item.coworkers, selected)
+      }));
+      const overlapCalendarMarkup = calendarHtml(overlapCalendarItems, { showCoworkers: true, onlyMarkedDays: true, blankText: '-', personalTight: true });
+      content.innerHTML = `
+        <div class="overlap-wrap">
+          <div class="section-head overlap-head-row">
+            <div class="selected-people">${selectedHtml}</div>
+            <div class="actions">${renderCalendarAdjustButtons('overlap')}<button type="button" class="btn" id="resetOverlapCalendarSizeBtn">달력크기 기본</button></div>
+          </div>
+          ${renderResizableCalendar(overlapCalendarMarkup, 'overlap', 'overlapCapture', overlapCalendarItems, { showCoworkers: true })}
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th></th><th>날짜</th><th>근무</th></tr></thead>
+              <tbody>
+                ${overlaps.length ? overlaps.map((x, i) => `<tr><td>(${i + 1})</td><td>${escapeHtml(x.date)}</td><td>${escapeHtml(x.shift)}</td></tr>`).join('') : '<tr><td colspan="3" class="muted">공동근무가 없습니다.</td></tr>'}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      `;
+      printRoot.innerHTML = overlapCalendarMarkup;
+
+      content.querySelectorAll('[data-remove-name]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          removeSelectedPerson(btn.getAttribute('data-remove-name'));
+        });
+      });
+      const resetOverlapSizeBtn = document.getElementById('resetOverlapCalendarSizeBtn');
+      bindCalendarFrameResize('overlap');
+      bindCalendarAdjustButtons('overlap');
+      bindCalendarDayEvents('overlap', selected);
+      if (resetOverlapSizeBtn) resetOverlapSizeBtn.addEventListener('click', () => {
+        app.calendarFrames.overlap = { width: null, height: null };
+        render();
+      });
+    }
+
+    function recordsForName(name) {
+      return app.records.filter(r => r.name === name).sort((a, b) => a.day - b.day);
+    }
+
+    function getShiftLabel(record) {
+      if (!record) return '';
+      if (record.shift === 'OFF') return 'OFF';
+      return String(record.rawShift || record.shift || '').trim();
+    }
+
+    function getShiftStats(records) {
+      if (!records || !records.length) return [];
+      const counts = new Map();
+      for (const record of records) {
+        const label = getShiftLabel(record);
+        if (!label) continue;
+        counts.set(label, (counts.get(label) || 0) + 1);
+      }
+      return Array.from(counts.entries())
+        .sort((a, b) => compareShiftLabels(a[0], b[0]))
+        .map(([label, count]) => ({ label, count, text: `${label} ${count}개` }));
+    }
+
+    function renderStatsChips(stats, activeShift = '') {
+      if (!stats || !stats.length) return '<span class="stats-chip">근무유형 통계 없음</span>';
+      return stats.map(item => {
+        const activeClass = activeShift === item.label ? ' active' : '';
+        return `<button type="button" class="stats-chip${activeClass}" data-shift-filter="${escapeHtml(item.label)}">${escapeHtml(item.text)}</button>`;
+      }).join('');
+    }
+
+    function renderCalendarAdjustButtons(tabKey) {
+      return `
+        <span class="mobile-calendar-adjust" data-calendar-adjust-wrap="${tabKey}">
+          <button type="button" class="btn mini-adjust-btn" data-calendar-adjust="${tabKey}:width:-70">가로-</button>
+          <button type="button" class="btn mini-adjust-btn" data-calendar-adjust="${tabKey}:width:70">가로+</button>
+          <button type="button" class="btn mini-adjust-btn" data-calendar-adjust="${tabKey}:height:-56">세로-</button>
+          <button type="button" class="btn mini-adjust-btn" data-calendar-adjust="${tabKey}:height:56">세로+</button>
+        </span>
+      `;
+    }
+
+    function getNamesForDayShift(day, shift) {
+      const matched = new Set(
+        app.records
+          .filter(r => r.day === day && r.shift === shift && r.shift !== 'OFF')
+          .map(r => r.name)
+      );
+      return app.names.filter(n => matched.has(n));
+    }
+
+    function findOverlaps(names) {
+      const selected = Array.from(new Set(names));
+      const days = Array.from(new Set(
+        app.records
+          .filter(r => selected.includes(r.name))
+          .map(r => r.day)
+      )).sort((a, b) => a - b);
+
+      const overlaps = [];
+      for (const day of days) {
+        const daily = selected.map(name => app.records.find(r => r.name === name && r.day === day));
+        if (daily.some(x => !x)) continue;
+        if (daily.some(x => x.shift === 'OFF')) continue;
+
+        const normalizedShifts = Array.from(new Set(daily.map(x => x.shift)));
+        if (normalizedShifts.length !== 1) continue;
+
+        overlaps.push({
+          day,
+          shift: daily[0].rawShift || daily[0].shift,
+          date: `${app.year}-${String(app.month).padStart(2,'0')}-${String(day).padStart(2,'0')}`,
+          coworkers: getNamesForDayShift(day, daily[0].shift),
+          members: daily.map(x => `${x.name}(${x.rawShift || x.shift})`)
+        });
+      }
+      return overlaps;
+    }
+
+    async function captureElement(element) {
+      if (!element) throw new Error('저장할 영역을 찾지 못했습니다.');
+
+      const liveFrame = element.querySelector('.calendar-resize-frame') || element;
+      const liveShell = liveFrame.querySelector('.calendar-shell') || liveFrame;
+      const liveCalendar = liveFrame.querySelector('.calendar') || liveFrame;
+      const liveWeekday = liveCalendar.querySelector('.weekday');
+      const liveDay = liveCalendar.querySelector('.day:not(.empty)') || liveCalendar.querySelector('.day');
+
+      const frameRect = liveFrame.getBoundingClientRect();
+      const shellRect = liveShell.getBoundingClientRect();
+      const calendarRect = liveCalendar.getBoundingClientRect();
+      const weekdayRect = liveWeekday ? liveWeekday.getBoundingClientRect() : null;
+      const dayRect = liveDay ? liveDay.getBoundingClientRect() : null;
+
+      const computedFrame = getComputedStyle(liveFrame);
+      const computedCalendar = getComputedStyle(liveCalendar);
+      const computedShell = getComputedStyle(liveShell);
+      const frozenDayHeight = computedFrame.getPropertyValue('--calendar-day-resize-height').trim();
+      const displayWidth = Math.ceil(Math.max(frameRect.width, liveFrame.clientWidth, liveFrame.scrollWidth, 320));
+      const displayHeight = Math.ceil(Math.max(
+        frameRect.height,
+        liveFrame.scrollHeight,
+        liveShell.scrollHeight,
+        liveCalendar.scrollHeight,
+        200
+      ));
+      const calendarWidth = Math.ceil(Math.max(calendarRect.width, liveCalendar.scrollWidth, displayWidth));
+      const weekdayHeight = Math.ceil(Math.max(weekdayRect ? weekdayRect.height : 0, parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--calendar-weekday-height')) || 20));
+      const dayHeight = Math.ceil(Math.max(dayRect ? dayRect.height : 0, parseFloat(frozenDayHeight) || parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--calendar-day-min-height')) || 96));
+      const borderRadius = computedShell.borderRadius || '12px';
+      const frameBorder = computedFrame.border || 'none';
+      const background = getComputedStyle(element).backgroundColor || getComputedStyle(document.body).backgroundColor || '#ffffff';
+      const bodyBackground = getComputedStyle(document.body).backgroundColor || background;
+      const bodyColor = getComputedStyle(document.body).color || '#1f2937';
+      const scopeBackground = getComputedStyle(liveShell).backgroundColor || background;
+      const rowGap = computedCalendar.rowGap || computedCalendar.gap || '2px';
+      const colGap = computedCalendar.columnGap || computedCalendar.gap || '2px';
+
+      const exportHost = document.createElement('div');
+      exportHost.setAttribute('data-export-host', 'true');
+      exportHost.style.position = 'fixed';
+      exportHost.style.left = '-100000px';
+      exportHost.style.top = '0';
+      exportHost.style.zIndex = '-1';
+      exportHost.style.background = bodyBackground;
+      exportHost.style.color = bodyColor;
+      exportHost.style.padding = '0';
+      exportHost.style.margin = '0';
+      exportHost.style.overflow = 'visible';
+      exportHost.style.width = `${displayWidth}px`;
+
+      const exportStyle = document.createElement('style');
+      exportStyle.textContent = `
+        [data-export-root="true"] {
+          width: ${displayWidth}px !important;
+          min-width: ${displayWidth}px !important;
+          max-width: ${displayWidth}px !important;
+          height: auto !important;
+          overflow: visible !important;
+          background: ${background} !important;
+          border-radius: ${borderRadius} !important;
+        }
+        [data-export-root="true"],
+        [data-export-root="true"] * {
+          box-sizing: border-box !important;
+        }
+        [data-export-root="true"] .capture-scope {
+          width: ${displayWidth}px !important;
+          min-width: ${displayWidth}px !important;
+          max-width: ${displayWidth}px !important;
+          height: auto !important;
+          overflow: visible !important;
+          background: ${background} !important;
+          border-radius: ${borderRadius} !important;
+        }
+        [data-export-root="true"] .calendar-resize-frame {
+          width: ${displayWidth}px !important;
+          min-width: ${displayWidth}px !important;
+          max-width: ${displayWidth}px !important;
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+          resize: none !important;
+          display: block !important;
+          border: ${frameBorder} !important;
+        }
+        [data-export-root="true"] .calendar-resize-frame .calendar-shell {
+          width: ${displayWidth}px !important;
+          min-width: ${displayWidth}px !important;
+          max-width: ${displayWidth}px !important;
+          height: auto !important;
+          overflow: visible !important;
+          padding-bottom: 0 !important;
+          -webkit-overflow-scrolling: auto !important;
+        }
+        [data-export-root="true"] .calendar-resize-frame .calendar {
+          width: ${calendarWidth}px !important;
+          min-width: ${calendarWidth}px !important;
+          max-width: ${calendarWidth}px !important;
+          height: auto !important;
+          row-gap: ${rowGap} !important;
+          column-gap: ${colGap} !important;
+          align-content: start !important;
+        }
+        [data-export-root="true"] .calendar-resize-frame .weekday {
+          min-height: ${weekdayHeight}px !important;
+          height: ${weekdayHeight}px !important;
+          max-height: ${weekdayHeight}px !important;
+          line-height: 1 !important;
+        }
+        [data-export-root="true"] .calendar-resize-frame .day {
+          min-height: ${dayHeight}px !important;
+          height: auto !important;
+        }
+      `;
+
+      const clone = element.cloneNode(true);
+      clone.setAttribute('data-export-root', 'true');
+      clone.style.width = `${displayWidth}px`;
+      clone.style.minWidth = `${displayWidth}px`;
+      clone.style.maxWidth = `${displayWidth}px`;
+      clone.style.height = 'auto';
+      clone.style.overflow = 'visible';
+      clone.style.background = background;
+
+      exportHost.appendChild(exportStyle);
+      exportHost.appendChild(clone);
+      document.body.appendChild(exportHost);
+
+      try {
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        const target = clone;
+        const rect = target.getBoundingClientRect();
+        const width = Math.ceil(Math.max(rect.width, target.scrollWidth, target.offsetWidth, displayWidth)) + 2;
+        const height = Math.ceil(Math.max(rect.height, target.scrollHeight, target.offsetHeight, displayHeight)) + 6;
+
+        return await html2canvas(target, {
+          backgroundColor: background,
+          scale: Math.max(2, window.devicePixelRatio || 1),
+          useCORS: true,
+          logging: false,
+          scrollX: 0,
+          scrollY: 0,
+          width,
+          height,
+          windowWidth: width,
+          windowHeight: height
+        });
+      } finally {
+        exportHost.remove();
+      }
+    }
+
+    async function saveElementAsPng(element, filename) {
+      try {
+        const canvas = await captureElement(element);
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = filename;
+        link.click();
+      } catch (err) {
+        alert('PNG 저장 중 오류가 발생했습니다. ' + err.message);
+      }
+    }
+
+    async function saveElementAsPdf(element, filename) {
+      try {
+        const canvas = await captureElement(element);
+        const imgData = canvas.toDataURL('image/png');
+        const { jsPDF } = window.jspdf;
+        const orientation = canvas.width >= canvas.height ? 'landscape' : 'portrait';
+        const pdf = new jsPDF({ orientation, unit: 'px', format: 'a4', hotfixes: ['px_scaling'] });
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
+        const margin = 18;
+        const ratio = Math.min((pageWidth - margin * 2) / canvas.width, (pageHeight - margin * 2) / canvas.height);
+        const drawWidth = canvas.width * ratio;
+        const drawHeight = canvas.height * ratio;
+        const offsetX = (pageWidth - drawWidth) / 2;
+        const offsetY = margin;
+        pdf.addImage(imgData, 'PNG', offsetX, offsetY, drawWidth, drawHeight);
+        pdf.save(filename);
+      } catch (err) {
+        alert('PDF 저장 중 오류가 발생했습니다. ' + err.message);
+      }
+    }
+
+    async function printElementAsImage(element, title) {
+      try {
+        const canvas = await captureElement(element);
+        const imgData = canvas.toDataURL('image/png');
+        const printBg = getComputedStyle(document.body).backgroundColor || '#ffffff';
+        const win = window.open('', '_blank');
+        if (!win) throw new Error('팝업이 차단되어 프린트 창을 열지 못했습니다.');
+        win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${escapeHtml(title)}</title><style>html,body{margin:0;padding:0;background:${printBg};}body{display:flex;align-items:flex-start;justify-content:center;}img{display:block;max-width:100%;width:auto;height:auto;} @page{margin:8mm; size:auto;} </style></head><body><img src="${imgData}" alt="print"></body></html>`);
+        win.document.close();
+        win.onload = () => {
+          win.focus();
+          win.print();
+        };
+      } catch (err) {
+        alert('프린트 준비 중 오류가 발생했습니다. ' + err.message);
+      }
+    }
+
+    function calendarHtml(items, options = {}) {
+      const totalDays = new Date(app.year, app.month, 0).getDate();
+      const firstDay = new Date(app.year, app.month - 1, 1).getDay();
+      const map = new Map(items.map(item => [item.day, item]));
+      const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
+      const calendarClass = options.personalTight ? 'calendar personal-tight' : 'calendar';
+      let html = `<div class="calendar-shell"><div class="${calendarClass}">`;
+      html += weekdays.map((d, idx) => {
+        const cls = idx === 0 ? 'weekday sun' : idx === 6 ? 'weekday sat' : 'weekday';
+        return `<div class="${cls}">${d}</div>`;
+      }).join('');
+      for (let i = 0; i < firstDay; i++) html += '<div class="day empty"></div>';
+      for (let day = 1; day <= totalDays; day++) {
+        const item = map.get(day);
+        const weekIdx = new Date(app.year, app.month - 1, day).getDay();
+        const classes = ['day'];
+        if (weekIdx === 0) classes.push('sun');
+        else if (weekIdx === 6) classes.push('sat');
+        else if (isHolidayDate(app.year, app.month, day)) classes.push('holiday');
+        if (item && options.highlightedShift && ((item.shiftLabel || item.rawShift || item.shift || '') === options.highlightedShift)) classes.push('shift-focus');
+        const className = classes.join(' ');
+        if (!item && options.onlyMarkedDays) {
+          html += `<div class="${className}" data-calendar-day="${day}" title="한번 누르면 선택, 다시 누르면 ${app.year}-${String(app.month).padStart(2,'0')}-${String(day).padStart(2,'0')} 전체 근무를 봅니다"><div class="date">${day}</div><div class="muted">${escapeHtml(options.blankText || '-')}</div></div>`;
+          continue;
+        }
+        if (!item) {
+          html += `<div class="${className}" data-calendar-day="${day}" title="한번 누르면 선택, 다시 누르면 ${app.year}-${String(app.month).padStart(2,'0')}-${String(day).padStart(2,'0')} 전체 근무를 봅니다"><div class="date">${day}</div><div class="muted">근무 없음</div></div>`;
+          continue;
+        }
+        html += `
+          <div class="${className}" data-calendar-day="${day}" title="한번 누르면 선택, 다시 누르면 ${app.year}-${String(app.month).padStart(2,'0')}-${String(day).padStart(2,'0')} 전체 근무를 봅니다">
+            <div class="date-row">
+              <div class="date">${day}</div>
+              <div class="shift">${escapeHtml(item.rawShift || item.shift || '')}</div>
+            </div>
+            ${options.showCoworkers ? `<div class="coworkers">${'coworkerHtml' in item ? item.coworkerHtml : escapeHtml(item.coworkerLabel || (item.coworkers && item.coworkers.length ? item.coworkers.join(', ') : '없음')).replaceAll('\n', '<br>')}</div>` : ''}
+          </div>
+        `;
+      }
+      html += '</div></div>';
+      return html;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#39;');
+    }
+  </script>
+</body>
+</html>
