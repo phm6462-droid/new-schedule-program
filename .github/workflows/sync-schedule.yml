@@ -29,7 +29,7 @@ jobs:
       - name: Download latest schedule pages
         timeout-minutes: 4
         env:
-          SYNC_START_MONTH: "2026-03"
+          SYNC_START_MONTH: "2026-08"
           SYNC_FUTURE_MONTHS: "1"
           MEDITONG_GROUP_NO: "5119"
           MEDITONG_COOKIE: ${{ secrets.MEDITONG_COOKIE }}
