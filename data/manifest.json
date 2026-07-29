@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-30T05:34:16+09:00",
+  "updatedAt": "2026-07-30T06:31:07+09:00",
   "source": {
     "baseUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate={ym}"
   },
@@ -10,7 +10,7 @@
       "url": "data/2026-07.html",
       "fileName": "2026-07.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-07",
-      "updatedAt": "2026-07-30T05:34:29+09:00"
+      "updatedAt": "2026-07-30T06:31:20+09:00"
     },
     {
       "key": "2026-08",
@@ -18,7 +18,7 @@
       "url": "data/2026-08.html",
       "fileName": "2026-08.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-08",
-      "updatedAt": "2026-07-30T05:34:36+09:00"
+      "updatedAt": "2026-07-30T06:31:27+09:00"
     }
   ],
   "failed": [
