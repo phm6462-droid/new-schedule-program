@@ -328,8 +328,8 @@
 			strUrl = "/bizwiz/board/board_write.asp?dbname=" + strCate3 + "&target=G&gc=" + strCate2;
 		}
 
-		//console.log("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119 / 102422_myworkschedule_20268112217 / /MWorks/102422");
-		CallPDFIA("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119", "102422_myworkschedule_20268112217", "/MWorks/102422",strUrl);
+		//console.log("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-09&group_no=5119 / 102422_myworkschedule_20268112222 / /MWorks/102422");
+		CallPDFIA("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-09&group_no=5119", "102422_myworkschedule_20268112222", "/MWorks/102422",strUrl);
 	}
 
 	function CallPDFIA(RequestURL, RequestFileName, RequestFolderName, strUrl) {
@@ -1462,8 +1462,8 @@ $(document).ready(function(){
 					근무표 > 내근무표 > 
 					<span class="now">
 						 &nbsp;   중환자실
-								(확정근무표 2026-07-31 오후 3:01:47)
-							
+							(근무표 확정전)
+						
 					</span>
 				</p>
 				<ul class="flex justify-content-flex-start">
@@ -1512,7 +1512,7 @@ $(document).ready(function(){
 								<input type="hidden" name="viewmode" value="a">
 								
 								<div class="input-group " data-date="" data-date-format="yyyy-mm"   style="width:180px;">
-									<input type="text" class="form-control input-small" id="txt_PS_Fall_Report_SDate" name="nDate" value="2026-08" placeholder="">
+									<input type="text" class="form-control input-small" id="txt_PS_Fall_Report_SDate" name="nDate" value="2026-09" placeholder="">
 									<span class="input-group-btn">
 									<button class="btn default " type="button" data-date-format="yyyy-mm" onclick="mf_CalIconClick('txt_PS_Fall_Report_SDate');">
 									&nbsp;<i class="fa fa-calendar"></i>&nbsp;
@@ -1531,11 +1531,11 @@ $(document).ready(function(){
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 엑셀로 다운로드 합니다.">
 								<a href="#modal_excel_confirm" data-toggle="modal" class="sky-blue-outline-btn btn-border-rounded">엑셀다운로드</a></span>
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 인쇄합니다.">
-								<a href="javascript:pdf_down('5119','2026-08');void(0);" class="sky-blue-outline-btn btn-border-rounded">인쇄</a></span>
+								<a href="javascript:pdf_down('5119','2026-09');void(0);" class="sky-blue-outline-btn btn-border-rounded">인쇄</a></span>
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 커뮤니티 게시판에 공유할 수 있습니다.">
 								<a href="#modal_share" data-toggle="modal"  class="sky-blue-outline-btn btn-border-rounded">공유</a></span>
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 PDF로 다운로드합니다.">
-								<a href="javascript:pdf_down('5119','2026-08');void(0);" data-toggle="modal"  class="sky-blue-outline-btn btn-border-rounded"> PDF 근무표 다운로드</a>
+								<a href="javascript:pdf_down('5119','2026-09');void(0);" data-toggle="modal"  class="sky-blue-outline-btn btn-border-rounded"> PDF 근무표 다운로드</a>
 								</span>
 								 
 									<span class="tooltips" >
@@ -1564,15 +1564,11 @@ $(document).ready(function(){
 								<th  rowspan="2" style="font-size:8pt;width:70px; min-width:70px" nowrap>일정<br/>제출<br/>완료</th>
 								
 									<th class="width-30p">
-										
-										<span class="font-blue">01</span>
-										
+										01
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">02</span>
-										
+										02
 									</th>
 									
 									<th class="width-30p">
@@ -1584,11 +1580,15 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										05
+										
+										<span class="font-blue">05</span>
+										
 									</th>
 									
 									<th class="width-30p">
-										06
+										
+										<span class="font-red">06</span>
+										
 									</th>
 									
 									<th class="width-30p">
@@ -1596,15 +1596,11 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-blue">08</span>
-										
+										08
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">09</span>
-										
+										09
 									</th>
 									
 									<th class="width-30p">
@@ -1616,11 +1612,15 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										12
+										
+										<span class="font-blue">12</span>
+										
 									</th>
 									
 									<th class="width-30p">
-										13
+										
+										<span class="font-red">13</span>
+										
 									</th>
 									
 									<th class="width-30p">
@@ -1628,21 +1628,15 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">15</span>
-										
+										15
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">16</span>
-										
+										16
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">17</span>
-										
+										17
 									</th>
 									
 									<th class="width-30p">
@@ -1650,11 +1644,15 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										19
+										
+										<span class="font-blue">19</span>
+										
 									</th>
 									
 									<th class="width-30p">
-										20
+										
+										<span class="font-red">20</span>
+										
 									</th>
 									
 									<th class="width-30p">
@@ -1662,31 +1660,35 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-blue">22</span>
-										
+										22
+									</th>
+									
+									<th class="width-30p">
+										23
 									</th>
 									
 									<th class="width-30p">
 										
-										<span class="font-red">23</span>
+										<span class="font-red">24</span>
 										
 									</th>
 									
 									<th class="width-30p">
-										24
+										
+										<span class="font-red">25</span>
+										
 									</th>
 									
 									<th class="width-30p">
-										25
+										
+										<span class="font-red">26</span>
+										
 									</th>
 									
 									<th class="width-30p">
-										26
-									</th>
-									
-									<th class="width-30p">
-										27
+										
+										<span class="font-red">27</span>
+										
 									</th>
 									
 									<th class="width-30p">
@@ -1694,27 +1696,67 @@ $(document).ready(function(){
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-blue">29</span>
-										
+										29
 									</th>
 									
 									<th class="width-30p">
-										
-										<span class="font-red">30</span>
-										
-									</th>
-									
-									<th class="width-30p">
-										31
+										30
 									</th>
 									
 
-								<th  colspan="13" style="width: 10vw; min-width: 100px;">근무자 합산</th>
+								<th  colspan="1" style="width: 10vw; min-width: 100px;">근무자 합산</th>
 							</tr>
 							<tr>
 								
 								<th>
+									화
+								</th>
+								
+								<th>
+									수
+								</th>
+								
+								<th>
+									목
+								</th>
+								
+								<th>
+									금
+								</th>
+								
+								<th>
+									
+										<span class="font-blue">토</span>
+									
+								</th>
+								
+								<th>
+									
+										<span class="font-red">일</span>
+									
+								</th>
+								
+								<th>
+									월
+								</th>
+								
+								<th>
+									화
+								</th>
+								
+								<th>
+									수
+								</th>
+								
+								<th>
+									목
+								</th>
+								
+								<th>
+									금
+								</th>
+								
+								<th>
 									
 										<span class="font-blue">토</span>
 									
@@ -1771,11 +1813,15 @@ $(document).ready(function(){
 								</th>
 								
 								<th>
-									목
+									
+										<span class="font-red">목</span>
+									
 								</th>
 								
 								<th>
-									금
+									
+										<span class="font-red">금</span>
+									
 								</th>
 								
 								<th>
@@ -1791,40 +1837,6 @@ $(document).ready(function(){
 								</th>
 								
 								<th>
-									
-										<span class="font-red">월</span>
-									
-								</th>
-								
-								<th>
-									화
-								</th>
-								
-								<th>
-									수
-								</th>
-								
-								<th>
-									목
-								</th>
-								
-								<th>
-									금
-								</th>
-								
-								<th>
-									
-										<span class="font-blue">토</span>
-									
-								</th>
-								
-								<th>
-									
-										<span class="font-red">일</span>
-									
-								</th>
-								
-								<th>
 									월
 								</th>
 								
@@ -1834,60 +1846,12 @@ $(document).ready(function(){
 								
 								<th>
 									수
-								</th>
-								
-								<th>
-									목
-								</th>
-								
-								<th>
-									금
-								</th>
-								
-								<th>
-									
-										<span class="font-blue">토</span>
-									
-								</th>
-								
-								<th>
-									
-										<span class="font-red">일</span>
-									
-								</th>
-								
-								<th>
-									월
 								</th>
 								
 								
 								<th style="width:50px;">근무</td>
 								
 								
-											<th style="width:50px; font-size: 11px;">결혼휴가</th>
-											
-											<th style="width:50px; font-size: 11px;">보수교육</th>
-											
-											<th style="width:50px; font-size: 11px;">생리휴가</th>
-											
-											<th style="width:50px; font-size: 11px;">연차</th>
-											
-											<th style="width:50px; font-size: 11px;">오전반차</th>
-											
-											<th style="width:50px; font-size: 11px;">육아휴직</th>
-											
-											<th style="width:50px; font-size: 11px;">D</th>
-											
-											<th style="width:50px; font-size: 11px;">D1</th>
-											
-											<th style="width:50px; font-size: 11px;">E1</th>
-											
-											<th style="width:50px; font-size: 11px;">H</th>
-											
-											<th style="width:50px; font-size: 11px;">N1</th>
-											
-											<th style="width:50px; font-size: 11px;">OFF</th>
-											
 							</tr>
 
 							
@@ -1901,102 +1865,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" >H</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >오전<br>반차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >오전<br>반차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" >H</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_0"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>20</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>7</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="0";
-												var tot="22";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2011,102 +1949,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_1"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>12</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="1";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2121,102 +2033,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_2"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>10</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>3</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="2";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2231,102 +2117,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_3"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>10</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="3";
-												var tot="19";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2341,102 +2201,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_4"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>7</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="4";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2451,102 +2285,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_5"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>9</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
-													<td>3</td>
-													
-													<td>10</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="5";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2561,102 +2369,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >결혼<br>휴가</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_6"></td>
 											
-													<td>6</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>6</td>
-													
-													<td>0</td>
-													
-													<td>3</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="6";
-												var tot="14";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2671,102 +2453,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_7"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>4</td>
-													
-													<td>11</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="7";
-												var tot="21";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2781,102 +2537,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >생리<br>휴가</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_8"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="8";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2891,102 +2621,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_9"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>8</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="9";
-												var tot="21";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3001,102 +2705,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
 
 											<td id="totwork_10"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="10";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3111,102 +2789,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_11"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>3</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>8</td>
-													
-													<td>6</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>8</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="11";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3221,102 +2873,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_12"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="12";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3331,102 +2957,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_13"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>8</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="13";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3441,102 +3041,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_14"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>8</td>
-													
-													<td>6</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="14";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3551,102 +3125,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_15"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>8</td>
-													
-													<td>6</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="15";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3661,102 +3209,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_16"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="16";
-												var tot="19";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3771,102 +3293,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_17"></td>
 											
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>6</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="17";
-												var tot="19";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3881,102 +3377,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_18"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>10</td>
-													
-													<td>5</td>
-													
-													<td>0</td>
-													
-													<td>5</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="18";
-												var tot="20";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -3991,102 +3461,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_19"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>10</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>4</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="19";
-												var tot="21";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -4101,102 +3545,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
-															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_20"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>10</td>
-													
-													<td>7</td>
-													
-													<td>0</td>
-													
-													<td>4</td>
-													
-													<td>9</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="20";
-												var tot="21";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -4211,102 +3629,76 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >오전<br>반차</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" >H</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >오전<br>반차</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" >H</td>
+															<td style=""></td>
 															
-															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
-															
-															<td class="color_white bg-font-white" >D</td>
+															<td style=""></td>
 															
 
 											<td id="totwork_21"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>1</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>15</td>
-													
-													<td>4</td>
-													
-													<td>0</td>
-													
-													<td>2</td>
-													
-													<td>0</td>
-													
-													<td>7</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="21";
-												var tot="21";									
+												var tot="0";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -4321,98 +3713,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_22"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="22";
@@ -4431,98 +3797,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_23"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="23";
@@ -4541,98 +3881,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_24"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="24";
@@ -4651,98 +3965,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_25"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="25";
@@ -4761,98 +4049,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_26"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="26";
@@ -4871,98 +4133,72 @@ $(document).ready(function(){
 
 											
 												<td class="text-center">
-												<i class="fa fa-check-square-o"></i><!-- 일정제출 완료 -->
+												<!-- 일정제출 완료 -->
 												</td>
 											
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
-															<td class="color_yellow bg-font-yellow" style="font-size: 7pt;" >육아<br>휴직</td>
-															
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
+														<td style=""></td>
+														
 
 											<td id="totwork_27"></td>
 											
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>31</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
 									
 											<script type="text/javascript">
 												var ncnt="27";
@@ -4993,7 +4229,7 @@ $(document).ready(function(){
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 엑셀로 다운로드 합니다.">
 								<a href="#modal_excel_confirm" data-toggle="modal" class="sky-blue-outline-btn btn-border-rounded">엑셀다운로드</a></span>
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 인쇄합니다.">
-								<a href="javascript:pdf_down('5119','2026-08');void(0);" class="sky-blue-outline-btn btn-border-rounded">인쇄</a>
+								<a href="javascript:pdf_down('5119','2026-09');void(0);" class="sky-blue-outline-btn btn-border-rounded">인쇄</a>
 								</span>
 
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 커뮤니티 게시판에 공유할 수 있습니다.">
@@ -5001,7 +4237,7 @@ $(document).ready(function(){
 								</span>
 
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무표를 PDF로 다운로드합니다.">
-								<a href="javascript:pdf_down('5119','2026-08');void(0);" data-toggle="modal"  class="sky-blue-outline-btn btn-border-rounded">PDF 근무표 다운로드</a>
+								<a href="javascript:pdf_down('5119','2026-09');void(0);" data-toggle="modal"  class="sky-blue-outline-btn btn-border-rounded">PDF 근무표 다운로드</a>
 								</span>
 								
 								<span class="tooltips" data-container="body" data-placement="top" data-original-title="근무자들의 근무일정을 작성(조정)합니다.(근무그룹의 근무표 운영자만 가능)">
@@ -5691,7 +4927,7 @@ $(document).ready(function(){
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn dark btn-outline" data-dismiss="modal">닫기</button>
-								<button type="button" class="btn btn-primary" style="width:120px;" onclick="mf_CommuiteShare('5119','2026-08');">공유하기</button>
+								<button type="button" class="btn btn-primary" style="width:120px;" onclick="mf_CommuiteShare('5119','2026-09');">공유하기</button>
 							</div>
 						</div>
 					</div>
@@ -5824,7 +5060,7 @@ $(document).ready(function(){
 												<td>&nbsp;근무표 출력 월 선택 :&nbsp;</td>
 												<td>
 													<div class="input-group " data-date="" data-date-format="yyyy-mm"   style="width:50px;margin-bottom: 2px;    display: inline;" >
-														<input type="text" class="form-control input-small" id="restStDate" name="restStDate" value="2026-08"  placeholder="">
+														<input type="text" class="form-control input-small" id="restStDate" name="restStDate" value="2026-09"  placeholder="">
 													</div>
 												</td>
 												<td>
@@ -5845,7 +5081,7 @@ $(document).ready(function(){
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn dark btn-outline" data-dismiss="modal">닫기</button>
-					<button type="button" class="btn green-jungle" onclick="excel_down('5119','2026-08');void(0);"> &nbsp; &nbsp; 엑셀다운로드 &nbsp; &nbsp; </button>
+					<button type="button" class="btn green-jungle" onclick="excel_down('5119','2026-09');void(0);"> &nbsp; &nbsp; 엑셀다운로드 &nbsp; &nbsp; </button>
 				</div>
 			</div>
 		</div>
