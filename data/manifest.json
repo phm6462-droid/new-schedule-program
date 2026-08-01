@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-01T21:54:46+09:00",
+  "updatedAt": "2026-08-01T23:22:03+09:00",
   "source": {
     "baseUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate={ym}"
   },
@@ -10,7 +10,7 @@
       "url": "data/2026-07.html",
       "fileName": "2026-07.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-07",
-      "updatedAt": "2026-08-01T21:54:16+09:00"
+      "updatedAt": "2026-08-01T23:21:31+09:00"
     },
     {
       "key": "2026-08",
@@ -18,7 +18,7 @@
       "url": "data/2026-08.html",
       "fileName": "2026-08.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-08",
-      "updatedAt": "2026-08-01T21:54:59+09:00"
+      "updatedAt": "2026-08-01T23:21:31+09:00"
     },
     {
       "key": "2026-09",
@@ -26,29 +26,37 @@
       "url": "data/2026-09.html",
       "fileName": "2026-09.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-09",
-      "updatedAt": "2026-08-01T21:55:01+09:00"
+      "updatedAt": "2026-08-01T23:21:31+09:00"
     }
   ],
   "failed": [
     {
       "key": "2026-03",
-      "reason": "BrowserContext.add_cookies: Cookie should have either url or path"
+      "reason": "timed out"
     },
     {
       "key": "2026-04",
-      "reason": "BrowserContext.add_cookies: Cookie should have either url or path"
+      "reason": "timed out"
     },
     {
       "key": "2026-05",
-      "reason": "BrowserContext.add_cookies: Cookie should have either url or path"
+      "reason": "timed out"
     },
     {
       "key": "2026-06",
-      "reason": "BrowserContext.add_cookies: Cookie should have either url or path"
+      "reason": "timed out"
     },
     {
       "key": "2026-07",
-      "reason": "BrowserContext.add_cookies: Cookie should have either url or path"
+      "reason": "timed out"
+    },
+    {
+      "key": "2026-08",
+      "reason": "timed out"
+    },
+    {
+      "key": "2026-09",
+      "reason": "timed out"
     }
   ]
 }
