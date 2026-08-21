@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-21T21:02:57+09:00",
+  "updatedAt": "2026-08-21T22:05:18+09:00",
   "source": {
     "baseUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate={ym}"
   },
@@ -10,7 +10,7 @@
       "url": "data/2026-07.html",
       "fileName": "2026-07.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-07",
-      "updatedAt": "2026-08-21T21:02:32+09:00"
+      "updatedAt": "2026-08-21T22:04:52+09:00"
     },
     {
       "key": "2026-08",
@@ -18,7 +18,7 @@
       "url": "data/2026-08.html",
       "fileName": "2026-08.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-08",
-      "updatedAt": "2026-08-21T21:03:12+09:00"
+      "updatedAt": "2026-08-21T22:05:33+09:00"
     },
     {
       "key": "2026-09",
@@ -26,7 +26,7 @@
       "url": "data/2026-09.html",
       "fileName": "2026-09.html",
       "sourceUrl": "https://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_new.asp?group_no=5119&strGBTopMenu=&LCode=l_31_1_1&viewmode=a&nDate=2026-09",
-      "updatedAt": "2026-08-21T21:03:14+09:00"
+      "updatedAt": "2026-08-21T22:05:35+09:00"
     }
   ],
   "failed": [
