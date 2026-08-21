@@ -328,8 +328,8 @@
 			strUrl = "/bizwiz/board/board_write.asp?dbname=" + strCate3 + "&target=G&gc=" + strCate2;
 		}
 
-		//console.log("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119 / 102422_myworkschedule_20268228128 / /MWorks/102422");
-		CallPDFIA("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119", "102422_myworkschedule_20268228128", "/MWorks/102422",strUrl);
+		//console.log("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119 / 102422_myworkschedule_20268228334 / /MWorks/102422");
+		CallPDFIA("http://gw.meditong.com/bizwiz/schedule/rnw_workSchedule_my_pdfNew.asp?EmpSeqno=448213&OfficeCode=102422&nDate=2026-08&group_no=5119", "102422_myworkschedule_20268228334", "/MWorks/102422",strUrl);
 	}
 
 	function CallPDFIA(RequestURL, RequestFileName, RequestFolderName, strUrl) {
@@ -1462,7 +1462,7 @@ $(document).ready(function(){
 					근무표 > 내근무표 > 
 					<span class="now">
 						 &nbsp;   중환자실
-								(확정근무표 2026-08-21 오전 11:19:37)
+								(확정근무표 2026-08-22 오전 8:24:51)
 							
 					</span>
 				</p>
@@ -1710,7 +1710,7 @@ $(document).ready(function(){
 									</th>
 									
 
-								<th  colspan="14" style="width: 10vw; min-width: 100px;">근무자 합산</th>
+								<th  colspan="15" style="width: 10vw; min-width: 100px;">근무자 합산</th>
 							</tr>
 							<tr>
 								
@@ -1866,6 +1866,8 @@ $(document).ready(function(){
 								
 											<th style="width:50px; font-size: 11px;">결혼휴가</th>
 											
+											<th style="width:50px; font-size: 11px;">병가</th>
+											
 											<th style="width:50px; font-size: 11px;">보수교육</th>
 											
 											<th style="width:50px; font-size: 11px;">생리휴가</th>
@@ -1979,6 +1981,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>1</td>
@@ -2060,15 +2064,15 @@ $(document).ready(function(){
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >병가</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td class="color_grey bg-font-grey" style="font-size: 7pt;" >병가</td>
 															
 															<td class="color_dark bg-font-dark" style="font-size: 7pt;" >보수<br>교육</td>
 															
 															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >연차</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
@@ -2085,34 +2089,36 @@ $(document).ready(function(){
 											
 													<td>0</td>
 													
-													<td>1</td>
-													
-													<td>0</td>
+													<td>2</td>
 													
 													<td>1</td>
 													
 													<td>0</td>
 													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>0</td>
-													
-													<td>11</td>
-													
-													<td>8</td>
-													
-													<td>0</td>
-													
 													<td>1</td>
+													
+													<td>0</td>
+													
+													<td>0</td>
+													
+													<td>0</td>
+													
+													<td>0</td>
 													
 													<td>9</td>
+													
+													<td>7</td>
+													
+													<td>0</td>
+													
+													<td>1</td>
+													
+													<td>10</td>
 													
 									
 											<script type="text/javascript">
 												var ncnt="1";
-												var tot="20";									
+												var tot="17";									
 												$("#totwork_"+ncnt).html(tot);
 											</script>
 										</tr>
@@ -2180,7 +2186,7 @@ $(document).ready(function(){
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >N1</td>
 															
@@ -2197,6 +2203,8 @@ $(document).ready(function(){
 											
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>0</td>
@@ -2211,9 +2219,9 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
-													<td>10</td>
+													<td>9</td>
 													
-													<td>7</td>
+													<td>8</td>
 													
 													<td>0</td>
 													
@@ -2307,6 +2315,8 @@ $(document).ready(function(){
 
 											<td id="totwork_3"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>1</td>
@@ -2425,6 +2435,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>2</td>
 													
 													<td>0</td>
@@ -2531,6 +2543,8 @@ $(document).ready(function(){
 
 											<td id="totwork_5"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -2649,6 +2663,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>2</td>
 													
 													<td>0</td>
@@ -2740,7 +2756,7 @@ $(document).ready(function(){
 															
 															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
@@ -2761,6 +2777,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>0</td>
@@ -2771,9 +2789,9 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
-													<td>4</td>
+													<td>5</td>
 													
-													<td>11</td>
+													<td>10</td>
 													
 													<td>0</td>
 													
@@ -2867,6 +2885,8 @@ $(document).ready(function(){
 
 											<td id="totwork_8"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -2985,6 +3005,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>0</td>
@@ -3097,6 +3119,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>2</td>
 													
 													<td>0</td>
@@ -3182,7 +3206,7 @@ $(document).ready(function(){
 															
 															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
+															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
@@ -3209,6 +3233,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>3</td>
 													
 													<td>0</td>
@@ -3219,9 +3245,9 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
-													<td>8</td>
+													<td>9</td>
 													
-													<td>6</td>
+													<td>5</td>
 													
 													<td>0</td>
 													
@@ -3315,6 +3341,8 @@ $(document).ready(function(){
 
 											<td id="totwork_12"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -3433,6 +3461,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>2</td>
 													
 													<td>0</td>
@@ -3518,7 +3548,7 @@ $(document).ready(function(){
 															
 															<td class="color_red-pink bg-font-red-pink" style="font-size: 7pt;" >OFF</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
@@ -3541,23 +3571,25 @@ $(document).ready(function(){
 											
 													<td>0</td>
 													
-													<td>1</td>
-													
 													<td>0</td>
 													
 													<td>1</td>
 													
 													<td>0</td>
 													
-													<td>0</td>
+													<td>1</td>
 													
 													<td>0</td>
 													
 													<td>0</td>
 													
-													<td>8</td>
+													<td>0</td>
 													
-													<td>6</td>
+													<td>0</td>
+													
+													<td>7</td>
+													
+													<td>7</td>
 													
 													<td>0</td>
 													
@@ -3651,6 +3683,8 @@ $(document).ready(function(){
 
 											<td id="totwork_15"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>1</td>
@@ -3765,6 +3799,8 @@ $(document).ready(function(){
 											
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>0</td>
@@ -3875,6 +3911,8 @@ $(document).ready(function(){
 
 											<td id="totwork_17"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>1</td>
@@ -3993,6 +4031,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>2</td>
 													
 													<td>0</td>
@@ -4084,7 +4124,7 @@ $(document).ready(function(){
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
-															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
+															<td class="color_white bg-font-white" style="font-size: 7pt;" >E1</td>
 															
 															<td class="color_white bg-font-white" style="font-size: 7pt;" >D1</td>
 															
@@ -4105,6 +4145,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>1</td>
 													
 													<td>0</td>
@@ -4115,9 +4157,9 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
-													<td>10</td>
+													<td>9</td>
 													
-													<td>7</td>
+													<td>8</td>
 													
 													<td>0</td>
 													
@@ -4211,6 +4253,8 @@ $(document).ready(function(){
 
 											<td id="totwork_20"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -4323,6 +4367,8 @@ $(document).ready(function(){
 
 											<td id="totwork_21"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -4447,6 +4493,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>31</td>
 													
 													<td>0</td>
@@ -4547,6 +4595,8 @@ $(document).ready(function(){
 
 											<td id="totwork_23"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -4671,6 +4721,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>31</td>
 													
 													<td>0</td>
@@ -4771,6 +4823,8 @@ $(document).ready(function(){
 
 											<td id="totwork_25"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
@@ -4895,6 +4949,8 @@ $(document).ready(function(){
 													
 													<td>0</td>
 													
+													<td>0</td>
+													
 													<td>31</td>
 													
 													<td>0</td>
@@ -4995,6 +5051,8 @@ $(document).ready(function(){
 
 											<td id="totwork_27"></td>
 											
+													<td>0</td>
+													
 													<td>0</td>
 													
 													<td>0</td>
